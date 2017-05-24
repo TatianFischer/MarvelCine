@@ -1,0 +1,130 @@
+/*Page de liste des films*/
+#vignettes{
+
+}
+
+.vignette{
+	position: relative;
+	padding-top: 33%;
+	margin-bottom:10px;
+}
+
+.vignette > a{
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+}
+
+.vignette a img{
+	display: block;
+	width :100%;
+	height:100%;
+	object-fit: cover;
+}
+
+.vignette a p{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #fff;
+	text-align: center;
+}
+
+
+
+
+
+/*Page de view*/
+.affiche{
+	
+}
+
+.affiche > img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	object-fit:cover;
+}
+
+
+
+/* Miniatures des afiches */
+
+#covers ul{
+	padding-left: 0;
+}
+
+#covers ul li.mini{
+	height: 100px;
+	margin-left: 10px;
+	min-width: 70px;
+	margin-top: 5px;
+}
+
+#covers ul li.mini img{
+	height: 100%;
+}
+
+
+@media (max-width: 991rem) {
+	#covers{
+		order: -1;
+	}
+}
+
+
+
+/* Bande Annonce */
+#menuBA{
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+#menuBA > div{
+	flex: 1 1 0%;
+	text-align: center;
+	min-width: 20rem;
+}
+
+#menuBA >  div > a, #menuBA > div > button{
+	padding:10px 15px;
+	border: 2px solid black;
+	border-radius: 15px;
+	line-height: 5rem;
+	text-decoration: none;
+}
+
+#menuBA > div > button{
+	background-color: white;
+	line-height: inherit;
+}
+
+#menuBA >  div:hover > a, #menuBA > div:hover > button{
+	border-color: #A81501;
+	color: #A81501;
+}
+
+#bande_annonce{
+	padding: 10px 0;
+	display: none;
+}
+
+#blogvision{
+	position: relative;
+	padding-top: 75%;
+}
+
+#bande_annonce iframe{
+	position: absolute;
+	width: 100%;
+	height: 75%;
+	top: 0;
+	left: 0;
+}
