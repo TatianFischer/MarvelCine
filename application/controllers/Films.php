@@ -6,11 +6,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Films extends CI_Controller
 {
-
+	public $per_page;
 	
 	public function __construct(){
 		// gére les autoload
 		parent::__construct();
+
+		//
+		$this->per_page = 6;
 
 		// appel du model
 		$this->load->model('films_model');
@@ -24,11 +27,15 @@ class Films extends CI_Controller
 
 
 
-	public function index($phase = null, $page = 1)
+	public function index($phase = null)
 	{
 		if($phase == null){
+			// Pagination
+			$this->config_paginate();
 
-			$films = $this->films_model->get_films_paginate($page);
+			$data['liens'] = $this->pagination->create_links();
+
+			$films = $this->films_model->get_films_paginate(0, $this->per_page);
 
 		} else {
 
@@ -47,6 +54,43 @@ class Films extends CI_Controller
 		// On rend la vue
 		$this->layout->addCss('films');
 	    $this->layout->view('films/index', $data);
+	}
+
+
+	public function page($offset){
+		// Pagination
+		$this->config_paginate();
+
+		$data['liens'] = $this->pagination->create_links();
+
+		$films = $this->films_model->get_films_paginate($offset, $this->per_page);
+
+		$data['films'] = $films;
+
+		//debug($data);
+
+		// On rend la vue
+		$this->layout->addCss('films');
+	    $this->layout->view('films/index', $data);
+	}
+
+	private function config_paginate(){
+		$config['base_url'] = base_url().'films/page/';
+		$config['first_url'] = base_url().'films/';
+		$config['total_rows'] = $this->films_model->get_films()->count_all_results();
+		$config['per_page'] = $this->per_page;
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li><b>';
+		$config['cur_tag_close'] = '</b></li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['full_tag_open'] = '<ul>';
+		$config['full_tag_close'] = '</ul>';
+		$this->pagination->initialize($config);
+
 	}
 
 

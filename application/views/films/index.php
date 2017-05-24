@@ -1,4 +1,12 @@
 <h1 class="txtcenter">Liste des films</h1>
+
+<!-- Liens de paginations -->
+<?php if(isset($liens)) : ?>
+<div class="txtcenter pagination">
+    <?= $liens; ?>
+</div>
+<?php endif ?>
+
 <!-- Vignettes -->
 <div class="grid-3-small-2 has-gutter-xl" id="vignettes">
 <?php foreach($films as $film) : ?>
@@ -20,3 +28,11 @@
     </div>
 <?php endforeach ?>
 </div>
+
+
+<!-- Liens de paginations -->
+<?php if(isset($liens)) : ?>
+<div class="txtcenter pagination">
+    <?= $liens; ?>
+</div>
+<?php endif ?>

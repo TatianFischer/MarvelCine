@@ -10,10 +10,11 @@ class films_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('pagination');
 	}
 
 
-	private function get_films(){		
+	public function get_films(){		
 
 		return $query = $this->db->select('id, title, phase')
 								->from('films');
@@ -33,8 +34,12 @@ class films_model extends CI_Model
 	}
 
 
-	public function get_films_paginate($page){
+	public function get_films_paginate($offset, $per_page){
+		$query = $this->get_films()
+					->limit($per_page, $offset)
+					->get();
 
+		return $films = $query->result();
 	}
 
 
