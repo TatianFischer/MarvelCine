@@ -1,6 +1,6 @@
 <h1 class="txtcenter">Liste des films</h1>
 <!-- Vignettes -->
-<div class="grid-4-small-2 has-gutter" id="vignettes">
+<div class="grid-3-small-2 has-gutter-xl" id="vignettes">
 <?php foreach($films as $film) : ?>
     <div class="vignette">
 

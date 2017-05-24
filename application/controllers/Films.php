@@ -14,6 +14,9 @@ class Films extends CI_Controller
 
 		// appel du model
 		$this->load->model('films_model');
+		$this->load->model('covers_model');
+		$this->load->model('directors_model');
+		$this->load->model('personnages_model');
 
 		// CSS du template
 		$this->layout->addCss('layout');
@@ -21,17 +24,23 @@ class Films extends CI_Controller
 
 
 
-	public function index($phase = null)
+	public function index($phase = null, $page = 1)
 	{
 		if($phase == null){
 
-			$data['films'] = $this->films_model->get_films();
+			$films = $this->films_model->get_films_paginate($page);
 
 		} else {
 
-			$data['films'] = $this->films_model->get_films_by_phase($phase);
+			$films = $this->films_model->get_films_by_phase($phase);
 
 		}
+
+		foreach ($films as $film) {
+			$film->main_cover = $this->covers_model->get_main_cover($film->id);
+		}
+
+		$data['films'] = $films;
 
 		//debug($data);
 
@@ -47,13 +56,13 @@ class Films extends CI_Controller
 		$data['film'] = $this->films_model->get_film_by_id($id);
 
 		// Appel à la base de données pour récupérer les personnages
-		$data['personnages'] = $this->films_model->get_personnages($id);
+		$data['personnages'] = $this->personnages_model->get_personnages($id);
 
 		// Appel à la base de données pour le réalisateur
-		$data['director'] = $this->films_model->get_director($data['film']->director_id);
+		$data['director'] = $this->directors_model->get_director($data['film']->director_id);
 
 		// Les affiches du film
-		$data['covers'] = $this->films_model->get_covers($id);
+		$data['covers'] = $this->covers_model->get_covers($id);
 		
 		//debug($data);
 
