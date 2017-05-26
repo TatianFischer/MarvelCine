@@ -81,7 +81,7 @@ class Films extends CI_Controller
 		$config['per_page'] = $this->per_page;
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li><b>';
+		$config['cur_tag_open'] = '<li class="current"><b>';
 		$config['cur_tag_close'] = '</b></li>';
 		$config['prev_tag_open'] = '<li>';
 		$config['prev_tag_close'] = '</li>';

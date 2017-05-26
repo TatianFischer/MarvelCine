@@ -30,13 +30,17 @@
 	border-right: none;
 }
 
+.pagination ul li.current{
+	background-color: #141b69;
+}
+
 .pagination ul li a{
 	text-decoration: none;
 	color: #A81501;
 }
 
-.pagination ul li b{
-	color: #141b69;
+.pagination ul li.current b{
+	color: white;
 }
 
 
@@ -51,26 +55,57 @@
 	margin-bottom: 3rem;
 }
 
-.vignette:hover{
-	
+.vignette div{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
 }
 
-.vignette > a{
-	position:absolute;
-	width:100%;
-	height:100%;
-	top:0;
-	left:0;
+.vignette div.back{
+	transform: rotateY(-180deg);
+	background-color: #141b69;
 }
 
-.vignette a img{
+.vignette div.front:hover{
+	transform: rotateY(180deg);
+	-webkit-transition-duration: 3s;
+	-o-transition-duration: 3s;
+	transition-duration: 3s;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition-timing-function: ease-in-out;
+	-o-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
+}
+
+div.front:hover + div.back{
+	transform: rotateY(0deg);
+	-webkit-transition-duration: 3s;
+	-o-transition-duration: 3s;
+	transition-duration: 3s;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition-timing-function: ease-in-out;
+	-o-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
+}
+
+.vignette div img{
 	display: block;
 	width :100%;
 	height:100%;
 	object-fit: cover;
 }
 
-.vignette a p{
+
+.vignette div p{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -79,6 +114,9 @@
 	text-align: center;
 }
 
+.vignette div a{
+	color: #fff;
+}
 
 
 
