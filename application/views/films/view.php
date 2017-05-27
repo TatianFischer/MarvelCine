@@ -2,46 +2,64 @@
 <h1 class="txtcenter"><?= $film->title ?></h1>
 
 <!-- Affiche du film  -->
-<div class="grid-3-small-1 has-gutter-l">
+<div class="grid-3-small-2 has-gutter-l">
     <div class="one-third">
-        <figure class="affiche">
-        <?php if(isset($covers[0])) :
-            echo img('affiches/'.$covers[0]->img, $covers[0]->alt);
-        else :
-        	echo img('affiches/gray.jpg');
-        endif; ?>
-        </figure>
-    </div>
+		<div id="conteneurAffiches">
+		    <?php if(!isset($covers)) : ?>
 
-    <!-- Description -->
-    <div class="two-thirds">
+				<figure class="affiche" id="mainAffiche">
+		    		<?php echo img('affiches/gray.jpg'); ?>
+				</figure>
+
+		    <?php else :
+
+		    	foreach($covers as $cover) : ?>
+
+		        <figure class="affiche" id="<?= ($cover->affiche) ? "mainAffiche" : "" ?>">
+		            <?php echo img('affiches/'.$cover->img, $cover->alt); ?>
+		        </figure>
+
+		    	<?php endforeach;
+
+		    endif; ?>
+		</div>
+
 	    <div id="covers">
-	    	<h2>Affiches</h2>
 	    	<ul>
-	    	<?php foreach ($covers as $cover) : ?>
-	    		<li class="inbl w10 small-tiny-w25 mini"><?= img('affiches/'.$cover->img, $cover->alt, "w100") ?></li>
-	    	<?php endforeach; ?>
+	    	<?php for ($i=0; $i < count($covers); $i++) : ?>
+	    		<li class="w10 small-tiny-w25 mini">
+	    			<?= img('affiches/'.$covers[$i]->img, $covers[$i]->alt, $i) ?></li>
+	    	<?php endfor; ?>
 	    	</ul>
 	    </div>
+
+    </div> <!-- Fin #mainAffiche -->
+
+
+
+
+
+    <!-- Description -->
+    <div class="two-thirds clear">
 
         <h2>Synopsis</h2>
         <p>
         	<?= $film->synopsis ?>
         </p>
-	    <div class="informations">
-	        <div class="grid-3 has-gutter-l ">
+	    <div id="informations">
+	        <div class="grid-3-small-2 has-gutter-l ">
 	        	<div>
 	        		<h2>Réalisateur</h2>
 	            	<p><?= $director->lastname.", ".$director->firstname ?></p>
 	            </div>
 	            <div>
-	            	<h2>Date de sortie</h2>
-	            	<p><?= date_fr($film->relase_date, 'd-m-Y'); ?></p>
-	            </div>
-	            <div>
 	            	<h2>Durée</h2>
 	            	<p><?= minutesToHours($film->duration) ?> min</p>
 	        	</div>	            
+	            <div>
+	            	<h2>Date de sortie</h2>
+	            	<p><?= date_fr($film->relase_date, 'd-m-Y'); ?></p>
+	            </div>
 	        </div>
 	        <div class="">
 	            <h2>Heros</h2>

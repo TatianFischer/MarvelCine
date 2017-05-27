@@ -120,42 +120,83 @@ div.front:hover + div.back{
 
 
 
+/*************************************/
+/***********  Page de view ***********/
+/*************************************/
+#conteneurAffiches{
 
-/*Page de view*/
+}
+
+
 .affiche{
-	
+	display: none;
+	overflow: hidden;
+}
+
+#mainAffiche{
+	z-index: 1;
+	display: block;
 }
 
 .affiche > img{
-	display: block;
+	position: relative;
 	margin-left: auto;
 	margin-right: auto;
+	height: 100%;
+	width: 100%;
 	object-fit:cover;
+	top:0px;
+}
+
+@media (max-width: 99.1rem) {
+	.affiche img{
+		max-width: 540px;
+		max-height: 800px;
+	}
 }
 
 
 
 /* Miniatures des afiches */
 
+#covers{
+	width: 100%;
+	overflow-x: scroll;
+}
+
 #covers ul{
 	padding-left: 0;
+	flex-wrap: nowrap;
+	display: flex;
 }
 
 #covers ul li.mini{
+	display: inline-block;
 	height: 100px;
 	margin-left: 10px;
 	min-width: 70px;
 	margin-top: 5px;
+	cursor: pointer;
+}
+
+#covers ul li.mini:first-child{
+	margin-left: 0;
 }
 
 #covers ul li.mini img{
+	width: 100%;
 	height: 100%;
 }
 
 
-@media (max-width: 991rem) {
+@media (max-width: 991px) {
 	#covers{
 		order: -1;
+	}
+
+	/* Informations */
+	#informations > div:first-child > div:nth-child(3){
+		width: 100%;
 	}
 }
 
