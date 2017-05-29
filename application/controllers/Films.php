@@ -100,7 +100,7 @@ class Films extends CI_Controller
 		$data['film'] = $this->films_model->get_film_by_id($id);
 
 		// Appel à la base de données pour récupérer les personnages
-		$data['personnages'] = $this->personnages_model->get_personnages($id);
+		$data['personnages'] = $this->personnages_model->get_personnages_in_film($id);
 
 		// Appel à la base de données pour le réalisateur
 		$data['director'] = $this->directors_model->get_director($data['film']->director_id);

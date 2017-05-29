@@ -51,7 +51,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= base_url() ?>">Liste des personnages</a>
+                    <a href="<?= base_url('personnages/') ?>">Liste des personnages</a>
                 </li>
             </ul>
             <ul class="fr">

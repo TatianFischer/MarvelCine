@@ -1,0 +1,53 @@
+section #list_persos{
+	padding-left: 0;
+}
+
+section #list_persos li{
+	margin-bottom: 2rem;
+	min-height: 100px;
+}
+
+section #list_persos li:nth-child(3n):hover{
+	background-color: white;
+	border: solid 3px #A81501;
+}
+
+section #list_persos li:nth-child(3n){
+	background-color: #A81501;
+}
+
+section #list_persos li:nth-child(3n+1):hover{
+	background-color: white;
+	border: solid 3px #141B69;
+}
+
+section #list_persos li:nth-child(3n+1){
+	background-color: #141B69;
+}
+
+section #list_persos li:nth-child(3n+2):hover{
+	background-color: white;
+	border : solid 3px green;
+}
+
+section #list_persos li:nth-child(3n+2){
+	background-color: green;
+}
+
+section #list_persos li a{
+	display: block;
+	padding:1rem;
+	color: #A0A8AD;
+	text-decoration: none;
+}
+
+section #list_persos li:hover a{
+	color: inherit;
+	text-decoration: underline;
+}
+
+@media (max-width: 543px) {
+	section #list_persos li{
+		width: 100%;
+	}
+}
