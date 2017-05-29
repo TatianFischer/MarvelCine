@@ -35,11 +35,9 @@
                 <?= img('logo.jpg', 'Accueil') ?>
             </a>
             <ul class="fl">
-                <li>
-                    <a href="<?= base_url()."films/" ?>">Liste des films</a>
-                </li>
                 <li class="dropdown">
-                    <a href="">Phases</a>
+                    <a href="<?= base_url()."films/" ?>">Liste des films</a>
+
                     <ul class="dropdown-menu">
                         <li>
                             <a href="<?= base_url()."films/index/1" ?>">Phase 1</a>
@@ -51,6 +49,9 @@
                             <a href="<?= base_url()."films/index/3" ?>">Phase 3</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="<?= base_url() ?>">Liste des personnages</a>
                 </li>
             </ul>
             <ul class="fr">
@@ -69,6 +70,11 @@
         <main class="mw1140p center">
             <section><?= $output; ?></section>            
         </main>
+
+        <footer>
+            <p>2017 - <a href="http://www.tatianafischer.fr" target="_blanc">@TatianFischer</a> - Tous droits réservés</p>
+            <p>The Flaticons are designed by Freepik from Flaticon</p>
+        </footer>
     </div>
 
 
