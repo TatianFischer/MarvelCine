@@ -8,6 +8,11 @@ class personnages_model extends CI_Model
 		parent::__construct();
 	}
 
+
+	/**
+	 * [get_personnages description]
+	 * @return [type] [description]
+	 */
 	public function get_personnages(){
 		$query = $this->db->select('*')
 							->from('personnages')
@@ -17,6 +22,46 @@ class personnages_model extends CI_Model
 
 		return $query->result();
 	}
+
+
+	public function set_personnage(){
+		$perso = array(
+			'identity' => $this->input->post('identity'),
+			'alias' => $this->input->post('alias'),
+			'actor' => $this->input->post('actor'),
+			'img' => $this->input->post('img'),
+			'bibliography' => $this->input->post('bibliography')
+		);
+
+		debug($perso);
+	}
+
+	public function get_personnage_by_id($id){
+
+		if(is_numeric($id)){
+			$query = $this->db->select('*')
+							->from('personnages')
+							->where('id', $id)
+							->get();
+			return $query->row();
+		}
+	}
+
+
+
+	public function get_films_by_personnage($id){
+
+		if(is_numeric($id)){
+			$query = $this->db->select('films.title, films.id, relase_date')
+							->from('films')
+							->join('film_personnage', 'film_personnage.film_id = films.id', 'left')
+							->where('film_personnage.perso_id', $id)
+							->get();
+			return $query->result();
+		}
+	}
+
+
 
 	/**
 	 * [get_personnages description]

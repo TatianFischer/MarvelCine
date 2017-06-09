@@ -94,7 +94,7 @@ class Films extends CI_Controller
 	}
 
 
-	public function view($id){
+	public function fiche($id){
 
 		// Appel à la base de données pour récupérer le film
 		$data['film'] = $this->films_model->get_film_by_id($id);
@@ -114,7 +114,7 @@ class Films extends CI_Controller
 		$this->layout->setTitre('Film - '.$data['film']->title);
 		$this->layout->addCss('films');
 		$this->layout->addJS('films');
-		$this->layout->view('films/view', $data);
+		$this->layout->view('films/fiche', $data);
 
 	}
 	

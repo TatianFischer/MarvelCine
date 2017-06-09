@@ -3,9 +3,11 @@ section #list_persos{
 }
 
 section #list_persos li{
+	position: relative;
 	margin-bottom: 2rem;
 	min-height: 100px;
 }
+
 
 section #list_persos li:nth-child(3n):hover{
 	background-color: white;
@@ -34,8 +36,23 @@ section #list_persos li:nth-child(3n+2){
 	background-color: green;
 }
 
+section #list_persos li img{
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	object-fit: cover;
+	width: 100px;
+	height: 100px;
+}
+
 section #list_persos li a{
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 	display: block;
+	width: 100%;
 	padding:1rem;
 	color: #A0A8AD;
 	text-decoration: none;
@@ -46,8 +63,56 @@ section #list_persos li:hover a{
 	text-decoration: underline;
 }
 
+
+
+
+
+/* BOUTON D AJOUT */
+section p#btn-ajout{
+	position: fixed;
+	right: 20px;
+	top: 50vh;
+	background-color: #A0A8AD;
+	border-radius: 50%;
+	height: 70px;
+	width: 70px;
+	margin:0;
+}
+
+section #btn-ajout a{
+	display: block;
+	color: white;
+	font-size: 5rem;
+	line-height: 5rem;
+	margin:7px 10px;
+}
+
+section #btn-ajout a i{
+
+}
+
+
+
+
+
+/* ******************* */
+/* MEDIA QUERIES */
+/* ******************* */
+
+@media (max-width: 767px){
+	section p#btn-ajout{
+		right: -3.5rem;
+	}
+
+	section p#btn-ajout:hover{
+		right: d0;
+	}
+}
+
 @media (max-width: 543px) {
 	section #list_persos li{
 		width: 100%;
 	}
+
+	
 }
