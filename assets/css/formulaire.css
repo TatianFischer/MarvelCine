@@ -1,0 +1,67 @@
+form{
+
+}
+
+fieldset{
+	border : 3px solid #141b69;
+	padding : 5rem 5%;
+}
+
+fieldset legend{
+	padding: 1rem;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+fieldset div.form-group{
+	margin-bottom: 2rem;
+	position: relative;
+}
+
+fieldset label{
+	display: inline-block;
+	width: 25%;
+	min-width: 150px;
+}
+
+
+fieldset input, fieldset textarea{
+	display: inline-block;
+	width: 70%;
+	border: 3px solid black;
+	padding:10px;
+}
+
+fieldset input:focus{
+	border-color: #141B69;
+}
+
+fieldset input[type="submit"]{
+	margin-top: 2rem;
+	margin-left: 25%;
+	background-color: white;
+}
+
+@media (max-width: 768px) {
+	fieldset label{
+		width: auto;
+		min-width: 0;
+		padding: 0 5px;
+		background-color: white;
+		position: absolute;
+		top:5px;
+		left: 10px;
+	}
+
+	fieldset label.active{
+		top: -15px;
+	}
+
+	fieldset input, fieldset textarea{
+		width: 100%;
+	}
+
+	fieldset input[type="submit"]{
+		margin-left: 0;
+	}
+}
