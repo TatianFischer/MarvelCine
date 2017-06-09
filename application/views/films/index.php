@@ -11,7 +11,7 @@
 <div class="grid-3-small-2 has-gutter-xl" id="vignettes">
 <?php foreach($films as $film) : ?>
     <div class="vignette">
-        <a href="<?= base_url("films/view/".$film->id) ?>">
+        <a href="<?= base_url("films/fiche/".$film->id) ?>">
             <div class="front">
                 <?php if(isset($film->main_cover)) : ?>
                     <?= img('affiches/'.$film->main_cover->img, $film->main_cover->alt, 'center') ?>
