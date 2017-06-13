@@ -77,7 +77,7 @@ class Films extends CI_Controller
 	private function config_paginate(){
 		$config['base_url'] = base_url().'films/page/';
 		$config['first_url'] = base_url().'films/';
-		$config['total_rows'] = $this->films_model->get_films()->count_all_results();
+		$config['total_rows'] = $this->films_model->get_allFilms()->count_all_results();
 		$config['per_page'] = $this->per_page;
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
@@ -115,6 +115,51 @@ class Films extends CI_Controller
 		$this->layout->addCss('films');
 		$this->layout->addJS('films');
 		$this->layout->view('films/fiche', $data);
+
+	}
+
+
+	public function create(){
+		// Chargement du helper de formulaire
+		$this->load->helper('form');
+		// Chargement de la librairie de validation
+		$this->load->library('form_validation');
+
+		$data['directors'] = $this->directors_model->get_allDirectors();
+
+		if($_POST){
+			$this->form_validation->set_rules('title', 'titre', 'trim|required|min_length[3]|max_length[255]');
+			$this->form_validation->set_rules('release_date', 'date de sortie', 'trim|required|regex_match[/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/]');
+			$this->form_validation->set_rules('synopsis', 'résumé', 'trim|min_length[5]');
+			$this->form_validation->set_rules('duration', 'durée', 'trim|required|is_natural_no_zero|greater_than[60]|less_than[300]');
+			$this->form_validation->set_rules('phase', 'phase', 'trim|required|greater_than[0]|less_than[10]');
+			$this->form_validation->set_rules('trailer', 'trailer', 'trim|required|exact_length[8]|integer');
+
+			if($this->input->post('director') != 'other'){
+				$this->form_validation->set_rules('director', 'réalisateur', 'trim|required|is_natural_no_zero');
+			} else {
+				$this->form_validation->set_rules('new_director', 'réalisateur', 'trim|required|min_length[5]|max_length[255]');
+			}
+			
+		}
+
+
+		if($this->form_validation->run() == FALSE){
+
+			// Si le formulaire est invalide ou vide
+			$this->layout->addCss('formulaire');
+			$this->layout->addJS('formulaire');
+
+			$this->layout->view('films/create', $data);
+
+		} else {
+			// Appel du model et ajout à la BDD
+			//$id = $this->films_model->set_film();
+			debug($_POST);
+
+			// OK redirection vers la fiche du film
+			//redirect('films/fiche/'.$id);
+		}
 
 	}
 	

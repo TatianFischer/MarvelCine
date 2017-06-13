@@ -14,7 +14,7 @@ class films_model extends CI_Model
 	}
 
 
-	public function get_films(){		
+	public function get_allFilms(){		
 
 		return $query = $this->db->select('id, title, phase')
 								->from('films');
@@ -24,7 +24,7 @@ class films_model extends CI_Model
 
 	public function get_films_by_phase($phase){
 
-		$query = $this->get_films()
+		$query = $this->get_allFilms()
 						->where('phase', $phase)
 						->get();
 		$films = $query->result();
@@ -35,7 +35,7 @@ class films_model extends CI_Model
 
 
 	public function get_films_paginate($offset, $per_page){
-		$query = $this->get_films()
+		$query = $this->get_allFilms()
 					->limit($per_page, $offset)
 					->get();
 

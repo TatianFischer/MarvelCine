@@ -20,5 +20,10 @@ class directors_model extends CI_Model
 			return $director = $query->row();
 		}
 	}
+
+	public function get_allDirectors(){
+		$query = $this->db->select("*")->from('directors')->get();
+		return $query->result();
+	}
 	
 }

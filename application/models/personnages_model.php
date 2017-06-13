@@ -83,4 +83,15 @@ class personnages_model extends CI_Model
 		}
 
 	}
+
+	public function get_groupes(){
+
+		$query =  $this->db->distinct()
+					->select('groupe')
+					->from('personnages')
+//					->where_not_in('groupe', 'null')
+					->get();
+
+		return $groupes = $query->result();
+	}
 }

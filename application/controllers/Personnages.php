@@ -55,25 +55,27 @@ class Personnages extends CI_Controller
 			$this->form_validation->set_rules('alias', 'alias', 'trim|min_length[5]|max_length[20]');
 			$this->form_validation->set_rules('actor', 'acteur', 'trim|required|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('image', 'image', 'trim|image');
+			$this->form_validation->set_rules('groupe', 'groupe', 'trim|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('bibliography', 'bibliographie', 'trim|min_length[15]');
 
 		}
 
 		if ($this->form_validation->run() == FALSE) {
-			
+			$data['groupes'] = $this->personnages_model->get_groupes();
+			debug($data);
 			// Si le formulaire est invalide
 			$this->layout->addCss('formulaire');
 			$this->layout->addJs('formulaire');
 			
-			$this->layout->view('personnages/create');
+			$this->layout->view('personnages/create', $data);
 
 		} else {
 
 			// Si le formulaire est valide
-			// Appel du model
-			$this->personnages_model->set_personnage();
+			// Appel du model et ajput à la BDD
+			$id = $this->personnages_model->set_personnage();
 
-			redirect('personnages/fiche');
+			redirect('personnages/fiche/'.$id);
 			
 		}		
 

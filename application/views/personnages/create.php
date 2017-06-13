@@ -6,28 +6,39 @@
 <fieldset>
 	<legend class="txtcenter">Ajout d'un nouveau personnage</legend>
 	<div class="form-group">
-		<label>Identité</label>
-		<input type="text" name="identity" value="<?= set_value('identity') ?>" required>
+		<label for="identity">Identité</label>
+		<input type="text" name="identity" value="<?= set_value('identity') ?>" id="identity" required>
 	</div>
 	
 	<div class="form-group">
-		<label>Alias (s'il existe)</label>
-		<input type="text" name="alias" value="<?= set_value('alias') ?>">
+		<label for="alias">Alias (s'il existe)</label>
+		<input type="text" name="alias" id="alias" value="<?= set_value('alias') ?>">
 	</div>
 	
 	<div class="form-group">
-		<label>Acteur</label>
-		<input type="text" name="actor" value="<?= set_value('actor') ?>" required>
+		<label for="actor">Acteur</label>
+		<input type="text" name="actor" id="actor" value="<?= set_value('actor') ?>" required>
 	</div>
 	
 	<div class="form-group">
-		<label>Image</label>
-		<input type="file" name="img">
+		<label for="img">Image</label>
+		<input type="file" name="img" id="img" value="<?= set_value('img') ?>">
 	</div>
 
 	<div class="form-group">
-		<label>Bibliographie</label>
-		<textarea id="bibliography"><?= set_value('bibliography'); ?></textarea>
+		<label for="bibliography">Bibliographie</label>
+		<textarea id="bibliography" name="bibliography"><?= set_value('bibliography'); ?></textarea>
+	</div>
+
+	<div class="form-group">
+		<label for="groupe">Groupe</label>
+		<select name="groupe" id="groupe">
+			<?php foreach ($groupes as $name) : ?>
+				<option value="<?= $name->groupe ?>" <?= set_select('groupe', $name->groupe) ?> >
+					<?= $name->groupe ?>
+				</option>
+			<?php endforeach ?>
+		</select>
 	</div>
 
 	<div class="form-group">

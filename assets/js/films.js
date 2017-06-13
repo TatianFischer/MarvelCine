@@ -18,7 +18,7 @@ var newMainAffiche;
 var heightFinale = "800px";
 //console.log(heightFinale);
 
-// Création de l'évèneùent click
+// Création de l'évènement click
 for (var i = 0; i < covers.length; i++) {
 
 	covers[i].addEventListener('click', function(e){

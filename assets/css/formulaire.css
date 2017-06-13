@@ -20,16 +20,34 @@ fieldset div.form-group{
 
 fieldset label{
 	display: inline-block;
-	width: 25%;
+	text-align: right;
+	width: 20%;
+	margin-right: 5%;
 	min-width: 150px;
 }
 
 
-fieldset input, fieldset textarea{
+fieldset input, fieldset textarea, fieldset select{
 	display: inline-block;
 	width: 70%;
 	border: 3px solid black;
 	padding:10px;
+}
+
+.like-input{
+	display: inline-block;
+	width: 60%;	
+}
+
+fieldset input[type="radio"]{
+	display: inline-block;
+	width: 10%;
+	margin-left: 25%;
+	padding-left: 10px;
+}
+
+fieldset input[name="new_director"]{
+	display: none;
 }
 
 fieldset input:focus{
@@ -38,7 +56,7 @@ fieldset input:focus{
 
 fieldset input[type="submit"]{
 	margin-top: 2rem;
-	margin-left: 25%;
+	margin-left: calc(25% + 5px);
 	background-color: white;
 }
 
@@ -57,7 +75,7 @@ fieldset input[type="submit"]{
 		top: -15px;
 	}
 
-	fieldset input, fieldset textarea{
+	fieldset input, fieldset textarea, fieldset select{
 		width: 100%;
 	}
 

@@ -10,43 +10,108 @@ function floatLabel(inputType){
 		//console.log(input);
 
 		if(formGroup.lastElementChild.type != "submit"){
+
+			// Effet en cas de retour serveur pour formulaire non valide.
+			if(input.value != "" || input.value !== 'blank'){
+
+				label = input.previousElementSibling;
+				if(label.tagName != "LABEL"){
+					label = label.previousElementSibling;
+				}
+
+				label.classList.add('active');
+			}
+
+
 			
 			input.addEventListener('focus', function(){
 
 				label = this.previousElementSibling;
-				console.log(label.classList);
+				
+				if(label.tagName != "LABEL"){
+					label = label.previousElementSibling;
+				}
 				label.classList.add('active');
-				console.log(label.classList);
 
 			});
+
+
 
 			input.addEventListener('blur', function(){
 
 				if(this.value == "" || this.value === 'blank'){
 
 					label = this.previousElementSibling;
-					console.log(label.classList);
 					label.classList.remove('active');
-					console.log(label.classList);
 				}		
 
 			});
+
+		}
+
+		listChild = formGroup.children;
+		//console.log(listChild);
+		for(i = 0; i < listChild.length; i++){
+			if(listChild[i].tagName == "SELECT"){
+
+				listChild[i].addEventListener('focus', function(){
+
+					label = this.previousElementSibling;
+					label.classList.add('active');
+
+				})
+
+				/*listChild[i].addEventListener('blur', function(){
+
+					label = this.previousElementSibling;
+					label.classList.remove('active');
+
+				})*/
+
+			}
 		}
 	}
-	/*$(inputType).each(function(){
-		var $this = $(this);
-		// on focus add class active to label
-		$this.focus(function(){
-			$this.next().addClass("active");
-		});
-		//on blur check field and remove class if needed
-		$this.blur(function(){
-			if($this.val() === '' || $this.val() === 'blank'){
-				$this.next().removeClass();
-			}
-		});
-	});*/
 }
 
 // just add a class of "floatLabel to the input field!"
-floatLabel(".form-group");
+// Au redimenssionement de la page
+window.addEventListener("resize", function(){
+	if(parseInt(window.innerWidth) <= 768){
+		floatLabel(".form-group");	
+	}
+})
+
+// Au chargement de la page
+if(parseInt(window.innerWidth) <= 768){
+	floatLabel(".form-group");	
+}
+
+
+
+
+
+
+
+/* Ajout du champ nouveau réalisateur */
+var elmtSelect = document.getElementById('director');
+ajoutNewDirector();
+
+
+elmtSelect.addEventListener("change", function(){
+	
+	ajoutNewDirector();
+
+})
+
+// Disparition du champ select et ajout du champ input type text.
+function ajoutNewDirector(){
+	valueSelect = elmtSelect.value;
+
+	if(valueSelect == 'other'){
+		elmtSelect.style.display = "none";
+
+		elmtInput = elmtSelect.nextElementSibling;
+		elmtInput.style.display = "inline-block";
+
+	}
+}
