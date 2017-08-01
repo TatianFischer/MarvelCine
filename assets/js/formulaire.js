@@ -94,14 +94,18 @@ if(parseInt(window.innerWidth) <= 768){
 
 /* Ajout du champ nouveau réalisateur */
 var elmtSelect = document.getElementById('director');
-ajoutNewDirector();
 
-
-elmtSelect.addEventListener("change", function(){
-	
+if(elmtSelect){
 	ajoutNewDirector();
 
-})
+	elmtSelect.addEventListener("change", function(){
+		
+		ajoutNewDirector();
+
+	})
+}
+
+
 
 // Disparition du champ select et ajout du champ input type text.
 function ajoutNewDirector(){

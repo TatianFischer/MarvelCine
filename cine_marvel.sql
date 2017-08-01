@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost
--- Généré le :  Ven 09 Juin 2017 à 11:42
+-- Généré le :  Lun 19 Juin 2017 à 13:13
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.4
 
@@ -73,31 +73,30 @@ INSERT INTO `covers` (`id`, `img`, `alt`, `film_id`, `affiche`) VALUES
 
 CREATE TABLE `directors` (
   `id` int(11) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `directors`
 --
 
-INSERT INTO `directors` (`id`, `firstname`, `lastname`) VALUES
-(1, 'Jan', 'Favreau'),
-(2, 'Louis', 'Leterrier'),
-(3, 'Kenneth', 'Branagh'),
-(4, 'Joe', 'Johnston'),
-(5, 'Joss', 'Whedon'),
-(6, 'Shane', 'Black'),
-(7, 'Alan', 'Taylor'),
-(8, 'Anthony et Joe', 'Russo'),
-(9, 'James', 'Gunn'),
-(10, 'Peyton', 'Reed'),
-(11, 'Scott', 'Derrickson'),
-(12, 'John', 'Watts'),
-(13, 'Taika', 'Waitit'),
-(14, 'Ryan', 'Coogler'),
-(15, 'Anna', 'Boden'),
-(16, 'Ryan', 'Fleck');
+INSERT INTO `directors` (`id`, `name`) VALUES
+(1, 'Jan Favreau'),
+(2, 'Louis Leterrier'),
+(3, 'Kenneth Branagh'),
+(4, 'Joe Johnston'),
+(5, 'Joss Whedon'),
+(6, 'Shane Black'),
+(7, 'Alan Taylor'),
+(8, 'Anthony et Joe Russo'),
+(9, 'James Gunn'),
+(10, 'Peyton Reed'),
+(11, 'Scott Derrickson'),
+(12, 'John Watts'),
+(13, 'Taika Waitit'),
+(14, 'Ryan Coogler'),
+(15, 'Anna Boden'),
+(16, 'Ryan Fleck');
 
 -- --------------------------------------------------------
 
@@ -108,19 +107,19 @@ INSERT INTO `directors` (`id`, `firstname`, `lastname`) VALUES
 CREATE TABLE `films` (
   `id` int(3) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `relase_date` date NOT NULL,
+  `release_date` date NOT NULL,
   `synopsis` text NOT NULL,
   `duration` int(3) NOT NULL,
   `phase` int(1) NOT NULL,
   `director_id` int(3) NOT NULL,
-  `trailer` varchar(15) NOT NULL
+  `trailer` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Contenu de la table `films`
 --
 
-INSERT INTO `films` (`id`, `title`, `relase_date`, `synopsis`, `duration`, `phase`, `director_id`, `trailer`) VALUES
+INSERT INTO `films` (`id`, `title`, `release_date`, `synopsis`, `duration`, `phase`, `director_id`, `trailer`) VALUES
 (1, 'Iron Man', '2008-04-30', 'Tony Stark, inventeur de génie, vendeur d\'armes et playboy milliardaire, est kidnappé en Aghanistan. Forcé par ses ravisseurs de fabriquer une arme redoutable, il construit en secret une armure high-tech révolutionnaire qu\'il utilise pour s\'échapper. Comprenant la puissance de cette armure, il décide de l\'améliorer et de l\'utiliser pour faire régner la justice et protéger les innocents', 125, 1, 1, '18809687'),
 (2, 'The Incredible Hulk', '2008-07-23', 'Le scientifique Bruce Banner cherche désespérément un antidote aux radiations gamma qui ont créé Hulk. Il vit dans l\'ombre, toujours amoureux de la belle Betty Ross et parcourt la planète à la recherche d\'un remède.\r\nLa force destructrice de Hulk attire le Général Thunderbolt Ross et son bras droit Blonsky qui rêvent de l\'utiliser à des fins militaires. Ils tentent de développer un sérum pour créer des soldats surpuissants.\r\nDe retour aux Etats-Unis, Bruce Banner se découvre un nouvel ennemi. Après avoir essayé le sérum expérimental, Blonsky est devenu L\'Abomination, un monstre incontrôlable dont la force pure est même supérieure à celle de Hulk. Devenu fou, il s\'est transformé en plein coeur de New York.\r\nPour sauver la ville de la destruction totale, Bruce Banner va devoir faire appel au monstre qui sommeille en lui...', 112, 1, 2, '18817835'),
 (3, 'Iron Man 2', '2010-04-28', 'Le monde sait désormais que l\'inventeur milliardaire Tony Stark et le super-héros Iron Man ne font qu\'un. Malgré la pression du gouvernement, de la presse et du public pour qu\'il partage sa technologie avec l\'armée, Tony n\'est pas disposé à divulguer les secrets de son armure, redoutant que l\'information atterrisse dans de mauvaises mains. Avec Pepper Potts et James \"Rhodey\" Rhodes à ses côtés, Tony va forger de nouvelles alliances et affronter de nouvelles forces toutes-puissantes...', 124, 1, 1, '19108036'),

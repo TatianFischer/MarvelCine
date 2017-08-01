@@ -14,24 +14,26 @@
 	margin-bottom: 1rem;
 	padding-left: 0;
 	border-radius: .5rem;
-	border: #141b69 solid .2rem;
+	border: #A81501 ridge .4rem;
 }
 
 .pagination ul li{
 	display: inline-block;
 	padding: .5rem 1rem;
+	border-left: #A81501 solid .3rem;
 }
 
-.pagination ul li:nth-child(n){
-	border-right: #141b69 solid .2rem;
-}
-
-.pagination ul li:last-child{
-	border-right: none;
+.pagination ul li:first-child{
+	border-left: none;
 }
 
 .pagination ul li.current{
-	background-color: #141b69;
+	background-color: #A81501;
+	border-left: none;
+}
+
+.pagination ul li.current + li{
+	border-left: none;
 }
 
 .pagination ul li a{
@@ -160,7 +162,7 @@ div.front:hover + div.back{
 
 
 
-/* Miniatures des afiches */
+/* Miniatures des affiches */
 
 #covers{
 	width: 100%;
@@ -191,6 +193,37 @@ div.front:hover + div.back{
 	height: 100%;
 }
 
+.synopsis{
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+#informations p > a{
+	text-decoration: none;
+}
+
+#informations p > a:hover{
+	text-decoration: underline;
+}
+
+#form_perso{
+	display: none;
+}
+
+#form_perso input, #form_perso select{
+	display: inline-block;
+	width: 60%;
+	border: 3px solid black;
+	padding:10px;
+}
+
+#form_perso input[type="submit"]{
+	width: 35%;
+	margin-top: 2rem;
+	background-color: white;
+	cursor: pointer;
+}
+
 
 @media (max-width: 991px) {
 	#covers{
@@ -200,6 +233,18 @@ div.front:hover + div.back{
 	/* Informations */
 	#informations > div:first-child > div:nth-child(3){
 		width: 100%;
+	}
+
+	#informations > div:first-child > div{
+		min-width: 160px;
+	}
+}
+
+@media (max-width: 543px){
+	#form_perso input, #form_perso select, #form_perso input[type="submit"]{
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
@@ -221,7 +266,7 @@ div.front:hover + div.back{
 	min-width: 20rem;
 }
 
-#menuBA >  div > a, #menuBA > div > button{
+#menuBA >  div > a, #menuBA > div > button, #btn-hero{
 	padding:10px 15px;
 	border: 2px solid black;
 	border-radius: 15px;
@@ -234,7 +279,7 @@ div.front:hover + div.back{
 	line-height: inherit;
 }
 
-#menuBA >  div:hover > a, #menuBA > div:hover > button{
+#menuBA >  div:hover > a, #menuBA > div:hover > button, #btn-hero:hover{
 	border-color: #A81501;
 	color: #A81501;
 }
@@ -255,4 +300,8 @@ div.front:hover + div.back{
 	height: 75%;
 	top: 0;
 	left: 0;
+}
+
+#form_cover{
+	display: none;
 }

@@ -11,9 +11,9 @@ class personnages_model extends CI_Model
 
 	/**
 	 * [get_personnages description]
-	 * @return [type] [description]
+	 * @return [object] [tous les personnages]
 	 */
-	public function get_personnages(){
+	public function get_all_personnages(){
 		$query = $this->db->select('*')
 							->from('personnages')
 							->order_by('identity', 'asc')
@@ -24,18 +24,36 @@ class personnages_model extends CI_Model
 	}
 
 
+
+	/**
+	 * [set_personnage description]
+	 * @return [int] $id [Id tu personnage inséré en BDD]
+	 */
 	public function set_personnage(){
+		$img = $this->input->post('img');
+		$img = ($img != "") ? $img : null;
+
 		$perso = array(
-			'identity' => $this->input->post('identity'),
-			'alias' => $this->input->post('alias'),
-			'actor' => $this->input->post('actor'),
-			'img' => $this->input->post('img'),
-			'bibliography' => $this->input->post('bibliography')
+			'identity' 	=> $this->input->post('identity'),
+			'alias' 	=> $this->input->post('alias'),
+			'actor' 	=> $this->input->post('actor'),
+			'img' 		=> $img,
+			'biography' => $this->input->post('biography'),
+			'groupe' 	=> $this->input->post('groupe')
 		);
 
-		debug($perso);
+		$this->db->insert('personnages', $perso);
+
+		return $this->db->insert_id();
 	}
 
+
+
+	/**
+	 * [get_personnage_by_id description]
+	 * @param  [int] $id [id du personnage]
+	 * @return [object]     [personnage]
+	 */
 	public function get_personnage_by_id($id){
 
 		if(is_numeric($id)){
@@ -52,7 +70,7 @@ class personnages_model extends CI_Model
 	public function get_films_by_personnage($id){
 
 		if(is_numeric($id)){
-			$query = $this->db->select('films.title, films.id, relase_date')
+			$query = $this->db->select('films.title, films.id, release_date')
 							->from('films')
 							->join('film_personnage', 'film_personnage.film_id = films.id', 'left')
 							->where('film_personnage.perso_id', $id)
@@ -72,7 +90,7 @@ class personnages_model extends CI_Model
 
 		if(is_numeric($film_id)){
 
-			$query = $this->db->select('alias, identity, img')
+			$query = $this->db->select('*')
 							->from('film_personnage')
 							->join('personnages', 'film_personnage.perso_id = personnages.id')
 							->where('film_id', $film_id)	
@@ -82,6 +100,21 @@ class personnages_model extends CI_Model
 
 		}
 
+	}
+
+	public function get_id_personnages_in_film($film_id)
+	{
+		if(is_numeric($film_id)){
+
+			$query = $this->db->select('perso_id')
+							->from('film_personnage')
+							->join('personnages', 'film_personnage.perso_id = personnages.id')
+							->where('film_id', $film_id)	
+							->get();
+
+			return $personnages = $query->result();
+
+		}
 	}
 
 	public function get_groupes(){

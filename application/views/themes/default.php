@@ -52,6 +52,12 @@
                 </li>
                 <li>
                     <a href="<?= base_url('personnages/') ?>">Liste des personnages</a>
+
+                    <!-- <ul class="dropdown-menu">
+                        <li>
+                            <a href="<?= base_url()."films/index/1" ?>">Phase 1</a>
+                        </li>
+                    </ul> -->
                 </li>
             </ul>
             <ul class="fr">

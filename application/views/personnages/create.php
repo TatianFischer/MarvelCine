@@ -22,7 +22,7 @@
 	
 	<div class="form-group">
 		<label for="img">Image</label>
-		<input type="file" name="img" id="img" value="<?= set_value('img') ?>">
+		<input type="text" name="img" id="img" value="<?= set_value('img') ?>" placeholder="Nom du fichier">
 	</div>
 
 	<div class="form-group">

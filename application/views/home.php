@@ -6,28 +6,45 @@
     </p>
 </article>
 
-<article class="grid has-gutter-xl">
+<article class="grid-3-small-2 has-gutter-l" id="home_film">
     <div>
+        <p>Dernier film</p>
         <figure>
-            <legend class="center">Dernier film sorti</legend>
-            <a href="">
-                <?= img('affiches\gray', 'test', 'w100') ?>
+            <legend class="center"><?= $last_film->title ?></legend>
+            <a href="<?= base_url("films/fiche/".$last_film->id);?>">
+                <?php if(isset($last_film->main_cover)) : ?>
+                    <?= img('affiches/'.$last_film->main_cover->img, $last_film->main_cover->alt, 'w100') ?>
+                <?php else : ?>
+                    <?= img('affiches/gray.jpg', 'w100'); ?>
+                <?php endif ?>
             </a>
         </figure>           
     </div>
+
     <div>
+        <p>Prochain film</p>
         <figure>
-            <legend class="center">Prochain film à sortir</legend>
-            <a href="">
-                <?= img('affiches\gray', 'test', 'w100') ?>
+            <legend class="center"><?= $next_film->title ?></legend>
+            <a href="<?= base_url("films/fiche/".$next_film->id); ?>">
+                <?php if(isset($next_film->main_cover)) : ?>
+                    <?= img('affiches/'.$next_film->main_cover->img, $next_film->main_cover->alt, 'w100') ?>
+                <?php else : ?>
+                    <?= img('affiches/gray.jpg', 'w100'); ?>
+                <?php endif; ?>
             </a>
         </figure>
     </div>
+
     <div>
+        <p>Film au hasard</p>
         <figure>
-            <legend class="center">Un film au hazard</legend>
-            <a href="">
-                <?= img('affiches\gray', 'test', 'w100') ?>
+            <legend class="center"><?= $random_film->title ?></legend>
+            <a href="<?= base_url("films/fiche/".$random_film->id); ?>">
+                <?php if(isset($random_film->main_cover)) : ?>
+                    <?= img('affiches/'.$random_film->main_cover->img, $random_film->main_cover->alt, 'w100') ?>
+                <?php else : ?>
+                    <?= img('affiches/gray.jpg', 'w100'); ?>
+                <?php endif; ?>
             </a>
         </figure>
     </div>

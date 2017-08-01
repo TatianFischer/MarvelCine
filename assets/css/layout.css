@@ -6,6 +6,7 @@ body{
     background-color: #141b69;
     font-size: 16px;
     font-size: 1.6rem;
+    color: white;
 }
 
 h2{
@@ -15,6 +16,7 @@ h2{
 
 #wrapper{
     background-color: #141b69;
+    color: black;
     border-radius: 5px;
 }
 
@@ -277,6 +279,42 @@ ul.dropdown-menu li a{
 }
 
 
+
+/* *************************** */
+/* ****** BOUTON D AJOUT ***** */
+/* *************************** */
+section p#btn-ajout{
+    position: fixed;
+    right: 20px;
+    top: 50vh;
+    background-color: #A0A8AD;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    margin:0;
+}
+
+section #btn-ajout a{
+    display: block;
+    color: white;
+    font-size: 4rem;
+    line-height: 4rem;
+    margin: 10px;
+}
+
+section #btn-ajout a i{
+
+}
+
+@media (max-width: 1199px){
+    section p#btn-ajout{
+        right: -3.5rem;
+    }
+
+    section p#btn-ajout:hover{
+        right: 0;
+    }
+}
 
 /* *************************** */
 /* ********** FOOTER ********* */

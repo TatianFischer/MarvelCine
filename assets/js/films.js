@@ -1,14 +1,38 @@
+// Voir la bande annonce
+
 var see_annonce = document.querySelectorAll("#menuBA > div > a");
 
-
-see_annonce[1].addEventListener('click', function(e) {
-	e.preventDefault();
-	document.getElementById('bande_annonce').style.display = "block";
+var ba_is_saw  = false;
+see_annonce[2].addEventListener('click', function(e) {
+	ba_is_saw = toggle(ba_is_saw, 'bande_annonce', e);
 });
 
 
+var form_cover_is_saw = false;
+// Voir le formulaire d'ajout des affiches
+see_annonce[1].addEventListener('click', function(e){
+	form_cover_is_saw = toggle(form_cover_is_saw, 'form_cover', e);
+})
 
-// Carrousel sur les bandes annonces
+
+
+
+
+// Voir le formulaire d'ajout de personnage
+var btn = document.getElementById('btn-hero');
+var form_perso_is_saw = false;
+
+btn.addEventListener('click', function(e){
+	form_perso_is_saw =  toggle(form_perso_is_saw, 'form_perso', e);
+})
+
+
+
+
+
+
+
+// Carrousel sur les affiches
 var covers = document.querySelectorAll("#covers ul li");
 //console.log(covers);
 

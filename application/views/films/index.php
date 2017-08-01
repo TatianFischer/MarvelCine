@@ -38,3 +38,9 @@
     <?= $liens; ?>
 </div>
 <?php endif ?>
+
+<p id="btn-ajout">
+    <a href="<?= base_url("films/create/") ?>" title="Ajout d'un film">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    </a>
+</p>

@@ -1,4 +1,4 @@
-<?php //debug($covers); ?>
+<?php //debug($list_all_persos); ?>
 <h1 class="txtcenter"><?= $film->title ?></h1>
 
 <!-- Affiche du film  -->
@@ -43,22 +43,26 @@
     <div class="two-thirds clear">
 
         <h2>Synopsis</h2>
-        <p>
+        <p class="synopsis">
         	<?= $film->synopsis ?>
         </p>
 	    <div id="informations">
 	        <div class="grid-3-small-2 has-gutter-l ">
 	        	<div>
 	        		<h2>Réalisateur</h2>
-	            	<p><?= $director->lastname.", ".$director->firstname ?></p>
+	            	<p><?= $director->name ?></p>
 	            </div>
 	            <div>
 	            	<h2>Durée</h2>
-	            	<p><?= minutesToHours($film->duration) ?> min</p>
+	            	<?php if($film->duration != 61) : ?>
+	            		<p><?= minutesToHours($film->duration) ?></p>
+	            	<?php else : ?>
+	            		<p>Durée inconnue</p>
+	            	<?php endif; ?>
 	        	</div>	            
 	            <div>
 	            	<h2>Date de sortie</h2>
-	            	<p><?= date_fr($film->relase_date, 'd-m-Y'); ?></p>
+	            	<p><?= date_fr($film->release_date, 'd-m-Y'); ?></p>
 	            </div>
 	        </div>
 	        <div class="">
@@ -70,18 +74,40 @@
 	            		foreach ($personnages as $key => $hero) {
 	            			$string = $hero->identity;
 	            			$string .= ($hero->alias) ? " (".$hero->alias.")" : "";
-	            			$string .= ($key != $lastKey) ? ", " : ".";
+	            			echo '<a href="'.base_url('personnages/fiche/'.$hero->id).'">';
 	            			echo $string;
+	            			echo '</a>';
+	            			echo $separator = ($key != $lastKey) ? ", " : ".";
 	            		}
 	            	?>
 	            </p>
+				<div>
+					<a href="<?= base_url('films/ajout_personnage/'.$film->id) ?>" id="btn-hero">
+						<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						Nouveau hero
+					</a>
+
+					<?= form_error('new_perso');?>
+
+					<?= form_open('films/ajout_personnage/'.$film->id, 'id="form_perso"') ?>
+					<select name="new_perso">
+						<?php foreach($list_all_persos as $personnage) :?>
+							<option value="<?= $personnage->id ?>"><?= $personnage->identity." - ".$personnage->actor ?></option>
+						<?php endforeach; ?>
+					</select>
+					<input type="submit" name="" value="Ajouter">
+					<?= form_close() ?>
+				</div>	
 	        </div>
 	    </div>
 
     </div>
 </div>
 
+
 <hr>
+
+
 
 <div id="menuBA">
 	<div>
@@ -92,12 +118,64 @@
 	</div>
 	<div>
 		<a href="#">
+			<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				Nouvelle affiche
+		</a>
+	</div>
+	<div>
+		<a href="#">
 			<i class="fa fa-eye" aria-hidden="true"></i>
 			Voir la bande annonce
 		</a>
 	</div>
 </div>
 
+
+<!-- AJOUT D'UNE AFFICHE -->
+<?= ($this->session->flashdata('upload') !== null) ? $this->session->flashdata('upload') : "" ?>
+<?= (isset($error)) ? $error : "" ?>
+
+<div id="form_cover">
+
+	<?= form_open_multipart('films/fiche/'.$film->id, 'id="form_affiche"');?>
+	<?= form_error('form_affiche'); ?>
+
+	<fieldset>
+		<legend>Ajout d'une affiche</legend>
+
+		<input type="hidden" name="film" value="<?= $film->id ?>">
+
+		<div class="form-group">
+			<label for="image">Image</label>
+			<input type="file" name="img" value="<?= set_value('img') ?>" required>
+		</div>
+
+		<div class="form-group">
+			<label for="name">Nom de l'image</label>
+			<input type="text" name="name" value="<?= set_value('name') ?>" required>
+		</div>
+
+		<div class="form-group">
+			<label for="alternative">Description</label>
+			<textarea name="alt" id='alternative' required><?= set_value('alt') ?></textarea>
+		</div>
+		
+		<div class="form-control">
+			<p class="like-label">Affiche principale ?</p>
+			<label>Oui</label>
+			<input type="radio" name="affiche" value="true" <?= set_radio('affiche', 'true'); ?>>
+			<label>Non</label>
+			<input type="radio" name="affiche" value="false" <?= set_radio('affiche', 'false', TRUE); ?>>
+		</div>
+
+		<input type="submit" name="Ajout">
+	</fieldset>
+	<?= form_close();?>
+</div>
+
+
+
+<!-- BANDE ANNONCE -->
 <div id="bande_annonce">
     <div id='blogvision'>
         <iframe src="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=<?= $film->trailer ?>">
@@ -109,7 +187,7 @@
 
 <div class="row r-m" style="display: none;">
 	<div class="col-sm-10 col-sm-offset-1" id="comment_bloc">
-	    <form class="form-horizontal" action="" method="post" id="comment">
+	    <?= form_open('#', 'id="form_comment"') ?>
 	        <fieldset>
 	            <legend>Ajouter un commentaire</legend>
 
@@ -129,6 +207,12 @@
 	                </div>
 	            </div>
 	        </fieldset>
-	    </form>
+	    <?= form_close();?>
 	</div>
 </div>
+
+<p id="btn-ajout">
+	<a href="<?= base_url("films/create/") ?>" title="Ajout d'un film">
+		<i class="fa fa-film" aria-hidden="true"></i>
+	</a>
+</p>

@@ -1,9 +1,32 @@
+h1{
+	text-align: center;
+}
+
+section #bio{
+	position: relative;
+	border: solid .3rem #A81501;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+section #bio h2{
+	position: absolute;
+	background-color: white;
+	transform: translate(50%, -50%);
+	top: 0;
+	left: 0;
+	padding: 5px 10px;
+}
+
+section #bio p{
+	margin-top: 20px;
+}
+
 section #list_persos{
 	padding-left: 0;
 }
 
 section #list_persos li{
-	position: relative;
 	margin-bottom: 2rem;
 	min-height: 100px;
 }
@@ -16,6 +39,7 @@ section #list_persos li:nth-child(3n):hover{
 
 section #list_persos li:nth-child(3n){
 	background-color: #A81501;
+	color: #A81501;
 }
 
 section #list_persos li:nth-child(3n+1):hover{
@@ -25,6 +49,7 @@ section #list_persos li:nth-child(3n+1):hover{
 
 section #list_persos li:nth-child(3n+1){
 	background-color: #141B69;
+	color: #141B69;
 }
 
 section #list_persos li:nth-child(3n+2):hover{
@@ -34,23 +59,10 @@ section #list_persos li:nth-child(3n+2):hover{
 
 section #list_persos li:nth-child(3n+2){
 	background-color: green;
-}
-
-section #list_persos li img{
-	position: absolute;
-	top:50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	object-fit: cover;
-	width: 100px;
-	height: 100px;
+	color: green;
 }
 
 section #list_persos li a{
-	position: absolute;
-	top:50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
 	display: block;
 	width: 100%;
 	padding:1rem;
@@ -60,40 +72,96 @@ section #list_persos li a{
 
 section #list_persos li:hover a{
 	color: inherit;
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 }
 
 
 
-
-
-/* BOUTON D AJOUT */
-section p#btn-ajout{
-	position: fixed;
-	right: 20px;
-	top: 50vh;
-	background-color: #A0A8AD;
-	border-radius: 50%;
-	height: 70px;
-	width: 70px;
-	margin:0;
+/* ******************* */
+/*  Fiche personnage  */
+/* ******************* */
+section{
+	position: relative;
 }
 
-section #btn-ajout a{
-	display: block;
-	color: white;
-	font-size: 5rem;
+#logo_fond{
+	width: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0.1;
+}
+
+
+/* Form. ajout film */
+
+section ul#list_films{
+	list-style-type: none;
+	padding-left: 0;
+}
+
+section #list_films a li{
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	margin-bottom: 2rem;
+	text-align: center;
+	border: solid .4rem green;
+}
+
+section #list_films a{
+	text-decoration: none;
+	text-align: center;
+	vertical-align: middle;
+	color: green;
+	z-index: 1;
+}
+
+section #list_films a li span{
+	display: inline-block;
+	width:50%;
+}
+
+section #list_films a li img{
+	height: 200px;
+	width: 35%;
+	min-width: 150px;
+	object-fit: cover;
+}
+
+/* ******************* */
+/* Form. ajout film */
+/* ******************* */
+#form_film{
+	display: none;
+}
+
+#form_film input, #form_film select{
+	display: inline-block;
+	width: 60%;
+	border: 3px solid black;
+	padding:10px;
+}
+
+#form_film input[type="submit"]{
+	width: 35%;
+	margin-top: 2rem;
+	background-color: white;
+	cursor: pointer;
+}
+
+#btn-film{
+	padding:10px 15px;
+	border: 2px solid black;
+	border-radius: 15px;
 	line-height: 5rem;
-	margin:7px 10px;
+	text-decoration: none;
 }
 
-section #btn-ajout a i{
-
+#btn-film:hover{
+	border-color: #A81501;
+	color: #A81501;
 }
-
-
-
-
 
 /* ******************* */
 /* MEDIA QUERIES */
@@ -114,5 +182,9 @@ section #btn-ajout a i{
 		width: 100%;
 	}
 
-	
+	#form_perso input, #form_perso select, #form_perso input[type="submit"]{
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }

@@ -36,7 +36,7 @@
 		<select name="director" id="director">
 			<?php foreach ($directors as $director) : ?>
 				<option value="<?= $director->id ?>" <?= set_select('director', $director->id) ?>>
-					<?= $director->id." - ".$director->firstname." ".$director->lastname; ?>
+					<?= $director->id." - ".$director->name; ?>
 				</option>
 			<?php endforeach; ?>
 			<option value="<?= 'other' ?>" <?= set_select('director', 'other') ?>>
@@ -48,7 +48,7 @@
 		<!-- <input type="radio" name="other_director" id="other_director">
 		<p class="like-input">Pour ajouter un nouveau réalisateur</p> -->
 
-		<input type="text" name="new_director" value="<?= set_value('new_director') ?>">
+		<input type="text" name="new_director" value="<?= set_value('new_director') ?>" placeholder="Prénom Nom">
 	</div>
 
 	<div class="form-group">

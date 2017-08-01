@@ -18,3 +18,16 @@ hamburger[0].addEventListener("click", function(){
 	}
 	console.log(class_hamburger);
 })
+
+// Fonction de toggle
+function toggle(var_boolean, elementId, e){
+	e.preventDefault();
+	if(var_boolean == false){
+		//console.log(document.getElementById(elementId));
+		document.getElementById(elementId).style.display = "block";
+		return var_boolean = true;
+	} else {
+		document.getElementById(elementId).style.display = "none";
+		return var_boolean = false;
+	}
+}
