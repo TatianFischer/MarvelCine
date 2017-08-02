@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost
--- Généré le :  Lun 19 Juin 2017 à 13:13
+-- Généré le :  Mar 01 Août 2017 à 12:52
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `covers` (
   `alt` text NOT NULL,
   `film_id` int(3) NOT NULL,
   `affiche` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Contenu de la table `covers`
@@ -63,7 +63,23 @@ INSERT INTO `covers` (`id`, `img`, `alt`, `film_id`, `affiche`) VALUES
 (25, 'thor_1_5.jpg', 'Affiche Thor. Accroche : The God Of Thunder.', 4, 0),
 (26, 'thor_1_6.jpg', 'Affiche Thor. Accroche : The God Of Mischief', 4, 0),
 (27, 'thor_1_7.jpg', 'Affiche Thor. Accroche : The King Of Asgard', 4, 0),
-(28, 'thor_1_8.jpg', 'Affiche Thor. Accroche : The Woman Of Science', 4, 0);
+(28, 'thor_1_8.jpg', 'Affiche Thor. Accroche : The Woman Of Science', 4, 0),
+(29, 'cap_1_1.jpg', 'Affiche principale : Captaine America, Peggy Carter, Bucky Barnes, les Commandos Hurlants et Cranes Rouges.', 5, 1),
+(30, 'cap_1_2.jpg', 'Affiche Captain America : Bouclier du Captain', 5, 0),
+(31, 'cap_1_3.jpg', 'Affiche Captain America', 5, 0),
+(32, 'cap_1_4.jpg', 'Affiche Captain America : Peggy Carter', 5, 0),
+(33, 'cap_1_5.jpg', 'Affiche Captain America.', 5, 0),
+(34, 'av_1_1.jpg', 'Affiche Avengers : Tous les avengers et Nick Fury', 6, 0),
+(35, 'av_1_2.jpg', 'Affiche Avengers : Style dessin. Captain America et Thor à l\'avant puis les autres avengers.', 6, 1),
+(36, 'av_1_3.jpg', 'Affiche Avengers : style dessin. Captain America en premier.', 6, 0),
+(37, 'av_1_4.jpg', 'Affiche Avengers : logo des avengers.', 6, 0),
+(38, 'ir_3_1.jpg', 'Affiche Iron Man 3 : Tony en armure Iron Man très abimé protégeant Pepper avec en arrière plan War Machine, le Mandarin et le docteur Aldrich Killian', 7, 1),
+(39, 'ir_3_2.jpg', 'Affiche Iron Man 3 : Style dessin. Iron Man et ses autres armures montant vers le ciel sur fond noir', 7, 0),
+(40, 'ir_3_3.jpg', 'Affiche Iron Man 3 : Iron Man en chute libre, son armure partant en morceaux', 7, 0),
+(41, 'ir_3_4.jpg', 'Affiche Iron Man 3 : War Patriot de trois-quart dos', 7, 0),
+(42, 'ir_3_5.jpg', 'Affiche Iron Man 3 : Pepper Potts avec le casque abimé d\'Iron Man dans les mains', 7, 0),
+(43, 'ir_3_6.jpg', 'Affiche Iron Man 3 :  Le Mandarin assis sur son trône', 7, 0),
+(44, 'ir_3_7.jpg', 'Affiche Iron Man 3 : Dr  Aldrich Killian de trois-quart face', 7, 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +90,7 @@ INSERT INTO `covers` (`id`, `img`, `alt`, `film_id`, `affiche`) VALUES
 CREATE TABLE `directors` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Contenu de la table `directors`
@@ -92,7 +108,7 @@ INSERT INTO `directors` (`id`, `name`) VALUES
 (9, 'James Gunn'),
 (10, 'Peyton Reed'),
 (11, 'Scott Derrickson'),
-(12, 'John Watts'),
+(12, 'Jon Watts'),
 (13, 'Taika Waitit'),
 (14, 'Ryan Coogler'),
 (15, 'Anna Boden'),
@@ -131,7 +147,12 @@ INSERT INTO `films` (`id`, `title`, `release_date`, `synopsis`, `duration`, `pha
 (9, 'Captain America : The Winter Soldier', '2014-03-26', 'Après les événements cataclysmiques de New York de The Avengers, Steve Rogers aka Captain America vit tranquillement à Washington, D.C. et essaye de s\'adapter au monde moderne. Mais quand un collègue du S.H.I.E.L.D. est attaqué, Steve se retrouve impliqué dans un réseau d\'intrigues qui met le monde en danger. S\'associant à Black Widow, Captain America lutte pour dénoncer une conspiration grandissante, tout en repoussant des tueurs professionnels envoyés pour le faire taire. Quand l\'étendue du plan maléfique est révélée, Captain America et Black Widow sollicite l\'aide d\'un nouvel allié, le Faucon. Cependant, ils se retrouvent bientôt face à un inattendu et redoutable ennemi - le Soldat de l\'Hiver.', 128, 2, 8, '19539268'),
 (10, ' Guardians Of The Galaxy', '2014-08-13', 'Peter Quill est un aventurier traqué par tous les chasseurs de primes pour avoir volé un mystérieux globe convoité par le puissant Ronan, dont les agissements menacent l’univers tout entier. Lorsqu’il découvre le véritable pouvoir de ce globe et la menace qui pèse sur la galaxie, il conclut une alliance fragile avec quatre aliens disparates : Rocket, un raton laveur fin tireur, Groot, un humanoïde semblable à un arbre, l’énigmatique et mortelle Gamora, et Drax le Destructeur, qui ne rêve que de vengeance. En les ralliant à sa cause, il les convainc de livrer un ultime combat aussi désespéré soit-il pour sauver ce qui peut encore l’être …', 121, 2, 9, '19546177'),
 (11, 'The Avengers : Age of Ultron', '2015-04-22', 'Alors que Tony Stark tente de relancer un programme de maintien de la paix jusque-là suspendu, les choses tournent mal et les super-héros Iron Man, Captain America, Thor, Hulk, Black Widow et Hawkeye vont devoir à nouveau unir leurs forces pour combattre le plus puissant de leurs adversaires : le terrible Ultron, un être technologique terrifiant qui s’est juré d’éradiquer l’espèce humaine.\r\nAfin d’empêcher celui-ci d’accomplir ses sombres desseins, des alliances inattendues se scellent, les entraînant dans une incroyable aventure et une haletante course contre le temps…', 141, 2, 5, '19548973'),
-(12, 'Ant-Man', '2015-07-14', 'Scott Lang, cambrioleur de haut vol, va devoir apprendre à se comporter en héros et aider son mentor, le Dr Hank Pym, à protéger le secret de son spectaculaire costume d’Ant-Man, afin d’affronter une effroyable menace…', 117, 2, 10, '19552728');
+(12, 'Ant-Man', '2015-07-14', 'Scott Lang, cambrioleur de haut vol, va devoir apprendre à se comporter en héros et aider son mentor, le Dr Hank Pym, à protéger le secret de son spectaculaire costume d’Ant-Man, afin d’affronter une effroyable menace…', 117, 2, 10, '19552728'),
+(13, 'Captain American : Civil War', '2016-04-18', 'Steve Rogers est désormais à la tête des Avengers, dont la mission est de protéger l\'humanité.. A la suite de l\'une de leurs interventions qui a causé d\'importants dégâts collatéraux, le gouvernement décide de mettre en place un organisme de commandement et de supervision.\r\nCette nouvelle donne provoque une scission au sein de l\'équipe : Steve Rogers reste attaché à sa liberté de s\'engager sans ingérence gouvernementale, tandis que d\'autres se rangent derrière Tony Stark, qui contre toute attente, décide de se soumettre au gouvernement...', 148, 3, 8, '19561381'),
+(14, 'Doctor Strange', '2016-10-26', 'Doctor Strange suit l\'histoire du Docteur Stephen Strange, talentueux neurochirurgien qui, après un tragique accident de voiture, doit mettre son égo de côté et apprendre les secrets d\'un monde caché de mysticisme et de dimensions alternatives. Basé à New York, dans le quartier de Greenwich Village, Doctor Strange doit jouer les intermédiaires entre le monde réel et ce qui se trouve au-delà, en utlisant un vaste éventail d\'aptitudes métaphysiques et d\'artefacts pour protéger le Marvel Cinematic Universe.', 115, 3, 11, '19562026'),
+(15, 'Guardians of the Galaxy Vol. 2', '2017-04-26', 'Alors qu\'une seconde mixtape offre sa musique, les Gardiens de la galaxie traversent le cosmos à la recherche de nouvelles aventures. Tandis que Groot est revenu en enfance, Peter Quill apprend l\'identité de son père, ce qui n\'est pas sans bouleverser l\'équipe. Alors que d\'anciens ennemis se joignent à eux, les gardiens sont confrontés à de nouveaux dangers...', 136, 3, 9, '19568905'),
+(16, 'Spider-Man :  Homecoming', '2017-07-12', 'Après ses spectaculaires débuts dans Captain America : Civil War, le jeune Peter Parker découvre peu à peu sa nouvelle identité, celle de Spider-Man, le super-héros lanceur de toile. Galvanisé par son expérience avec les Avengers, Peter rentre chez lui auprès de sa tante May, sous l’œil attentif de son nouveau mentor, Tony Stark. Il s’efforce de reprendre sa vie d’avant, mais au fond de lui, Peter rêve de se prouver qu’il est plus que le sympathique super héros du quartier. L’apparition d’un nouvel ennemi, le Vautour, va mettre en danger tout ce qui compte pour lui...', 134, 3, 12, '19569522'),
+(17, 'Thor 3: Ragnarok', '2017-10-25', 'Privé de son puissant marteau, Thor est retenu prisonnier sur une lointaine planète aux confins de l’univers. Pour sauver Asgard, il va devoir lutter contre le temps afin d’empêcher l’impitoyable Hela d’accomplir le Ragnarök – la destruction de son monde et la fin de la civilisation asgardienne. Mais pour y parvenir, il va d’abord devoir mener un combat titanesque de gladiateurs contre celui qui était autrefois son allié au sein des Avengers : l’incroyable Hulk…', 61, 3, 13, '19573071');
 
 -- --------------------------------------------------------
 
@@ -231,7 +252,29 @@ INSERT INTO `film_personnage` (`id`, `perso_id`, `film_id`) VALUES
 (79, 36, 12),
 (80, 37, 12),
 (81, 19, 12),
-(82, 17, 12);
+(82, 17, 12),
+(83, 16, 13),
+(84, 2, 13),
+(85, 8, 13),
+(86, 18, 13),
+(87, 22, 13),
+(88, 6, 13),
+(89, 15, 13),
+(90, 38, 13),
+(91, 34, 13),
+(92, 33, 13),
+(93, 35, 13),
+(94, 39, 13),
+(95, 40, 13),
+(96, 41, 14),
+(97, 23, 15),
+(98, 24, 15),
+(99, 29, 15),
+(100, 30, 15),
+(101, 25, 15),
+(102, 28, 15),
+(103, 27, 15),
+(104, 31, 15);
 
 -- --------------------------------------------------------
 
@@ -290,7 +333,11 @@ INSERT INTO `personnages` (`id`, `identity`, `alias`, `actor`, `img`, `biography
 (34, 'The Vision', NULL, 'Paul Bettany', NULL, NULL, 'Avenger'),
 (35, 'Scott Lang', 'Ant-Man', 'Paul Rudd', NULL, NULL, 'Avenger'),
 (36, 'Hope Van Dyne', NULL, 'Evangeline Lilly', NULL, NULL, NULL),
-(37, 'Dr Hank Pym', NULL, 'Michael Douglas', NULL, NULL, NULL);
+(37, 'Dr Hank Pym', NULL, 'Michael Douglas', NULL, NULL, NULL),
+(38, 'T\'Challa', 'The Black Panther', 'Chadwick Boseman', NULL, NULL, 'Avenger'),
+(39, 'Sharon Carter', 'Agent 13', 'Emily VanCamp', NULL, NULL, ''),
+(40, 'Peter Parker', 'Spiderman', 'Tom Holland', 'spiderman-web.svg', NULL, 'Avenger'),
+(41, 'Stephen Strange', 'Doctor Strange', 'Benedict Cumberbatch', 'dr-strange.svg', NULL, '');
 
 --
 -- Index pour les tables exportées
@@ -338,7 +385,7 @@ ALTER TABLE `personnages`
 -- AUTO_INCREMENT pour la table `covers`
 --
 ALTER TABLE `covers`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT pour la table `directors`
 --
@@ -348,17 +395,17 @@ ALTER TABLE `directors`
 -- AUTO_INCREMENT pour la table `films`
 --
 ALTER TABLE `films`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT pour la table `film_personnage`
 --
 ALTER TABLE `film_personnage`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 --
 -- AUTO_INCREMENT pour la table `personnages`
 --
 ALTER TABLE `personnages`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- Contraintes pour les tables exportées
 --
