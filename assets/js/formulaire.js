@@ -1,7 +1,7 @@
 /*-----------LABEL FLOTTANT--------------*/
 function floatLabel(inputType){
 	listFormGroup = document.querySelectorAll(inputType);
-	console.log(listFormGroup);
+	//console.log(listFormGroup);
 
 	for(var formGroup of listFormGroup){
 
@@ -9,8 +9,8 @@ function floatLabel(inputType){
 
 		//console.log(input);
 
-		if(formGroup.lastElementChild.type != "submit"){
-
+		if(input.type != "submit"){
+			
 			// Effet en cas de retour serveur pour formulaire non valide.
 			if(input.value != "" || input.value !== 'blank'){
 
@@ -27,7 +27,6 @@ function floatLabel(inputType){
 			input.addEventListener('focus', function(){
 
 				label = this.previousElementSibling;
-				
 				if(label.tagName != "LABEL"){
 					label = label.previousElementSibling;
 				}
@@ -77,13 +76,15 @@ function floatLabel(inputType){
 // Au redimenssionement de la page
 window.addEventListener("resize", function(){
 	if(parseInt(window.innerWidth) <= 768){
-		floatLabel(".form-group");	
+		floatLabel("#form_affiche .form-group");	
+		floatLabel("#form_comment .form-group");	
 	}
 })
 
 // Au chargement de la page
 if(parseInt(window.innerWidth) <= 768){
-	floatLabel(".form-group");	
+	floatLabel("#form_affiche .form-group");	
+	floatLabel("#form_comment .form-group");	
 }
 
 

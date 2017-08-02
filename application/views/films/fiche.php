@@ -15,8 +15,8 @@
 
 		    	foreach($covers as $cover) : ?>
 
-		        <figure class="affiche" id="<?= ($cover->affiche) ? "mainAffiche" : "" ?>">
-		            <?php echo img('affiches/'.$cover->img, $cover->alt); ?>
+		        <figure class="affiche" id="<?= (isset($cover->affiche)) ? 'mainAffiche' : '' ?>">
+		            <?= img('affiches/'.$cover->img, $cover->alt); ?>
 		        </figure>
 
 		    	<?php endforeach;
@@ -44,7 +44,7 @@
 
         <h2>Synopsis</h2>
         <p class="synopsis">
-        	<?= $film->synopsis ?>
+        	<?= nl2br($film->synopsis); ?>
         </p>
 	    <div id="informations">
 	        <div class="grid-3-small-2 has-gutter-l ">
@@ -160,13 +160,13 @@
 			<textarea name="alt" id='alternative' required><?= set_value('alt') ?></textarea>
 		</div>
 		
-		<div class="form-control">
+		<!-- <div class="form-control">
 			<p class="like-label">Affiche principale ?</p>
 			<label>Oui</label>
 			<input type="radio" name="affiche" value="true" <?= set_radio('affiche', 'true'); ?>>
 			<label>Non</label>
 			<input type="radio" name="affiche" value="false" <?= set_radio('affiche', 'false', TRUE); ?>>
-		</div>
+		</div> -->
 
 		<input type="submit" name="Ajout">
 	</fieldset>
@@ -195,16 +195,12 @@
 	            <input type="text" value="" hidden>
 
 	            <div class="form-group">
-	                <div class="col-sm-10 col-sm-offset-1 col-xs-12">
-	                    <textarea class="form-control" id="textarea" name="content"></textarea>
-	                    <label class="control-label" for="content">Votre Commentaire</label>
-	                </div>
+                    <label class="control-label" for="content">Votre Commentaire</label>
+                    <textarea class="form-control" id="textarea" name="content"></textarea>
 	            </div>
 
 	            <div class="form-group">
-	                <div class="col-xs-6 col-xs-offset-3">
-	                    <input type="submit" class="form-control">
-	                </div>
+	                <input type="submit" class="form-control">
 	            </div>
 	        </fieldset>
 	    <?= form_close();?>

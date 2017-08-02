@@ -246,6 +246,10 @@ div.front:hover + div.back{
 		margin-left: auto;
 		margin-right: auto;
 	}
+
+	.synopsis{
+		max-height: initial;
+	}
 }
 
 

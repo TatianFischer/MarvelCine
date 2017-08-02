@@ -8,6 +8,8 @@ see_annonce[2].addEventListener('click', function(e) {
 });
 
 
+
+
 var form_cover_is_saw = false;
 // Voir le formulaire d'ajout des affiches
 see_annonce[1].addEventListener('click', function(e){
@@ -55,7 +57,6 @@ for (var i = 0; i < covers.length; i++) {
 
 		heightFinale = parseInt(getComputedStyle(lastMainAffiche).height);
 
-
 	});
 }
 
@@ -74,23 +75,29 @@ function getAfficheOut(){
 
 		// Selection de la nouvelle affiche mise en avant
 		newMainAffiche = document.querySelectorAll("#conteneurAffiches figure")[nb];
+
 		newMainAffiche.id = "mainAffiche";
 		newMainAffiche.style.height = "0px";
+		//newMainAffiche.style.display = "block";
 		
 		// Arrêt de l'animation
 		clearInterval(getAfficheOutId);
 
 		// Lancement de l'animation affichant la nouvelle affiche
+		//getAfficheIn();
 		getAfficheInId = setInterval(getAfficheIn);
 	}
 }
 
 function getAfficheIn(){
-	height = parseInt(getComputedStyle(newMainAffiche).height) +1;
 	
+	height = height + 1;
+
 	if(height <= heightFinale){
 
-		newMainAffiche.style.height = height+"px";
+		document.getElementById("mainAffiche").style.height = height+"px";
+		//console.log(parseInt(getComputedStyle(test).height));
+		//console.log(test);
 		
 	} else {
 

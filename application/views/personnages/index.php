@@ -13,6 +13,6 @@
 
 <p id="btn-ajout">
 	<a href="<?= base_url("personnages/create/") ?>" title="Ajout d'un personnage">
-		<i class="fa fa-plus-circle" aria-hidden="true"></i>
+		<i class="fa fa-user-plus" aria-hidden="true"></i>
 	</a>
 </p>

@@ -44,7 +44,7 @@ class Films extends CI_Controller
 		}
 
 		foreach ($films as $film) {
-			$film->main_cover = $this->covers_model->get_main_cover($film->id);
+			$film->main_cover = $this->covers_model->get_random_cover($film->id);
 		}
 
 		$data['films'] = $films;
@@ -148,6 +148,7 @@ class Films extends CI_Controller
 
 		// Les affiches du film
 		$data['covers'] = $this->covers_model->get_covers($id_film);
+		if($data['covers'] != null){$data['covers'][0]->affiche = 1;}
 
 		// Liste de tous les personnages (formulaire d'ajout)
 		$liste = $this->personnages_model->get_all_personnages();
@@ -176,7 +177,6 @@ class Films extends CI_Controller
 
 		if($_POST){
 			$this->form_validation->set_rules('alt', 'description', 'trim|required|min_length[5]');
-			$this->form_validation->set_rules('affiche', 'affiche', 'required|in_list[true,false]');
 			$this->form_validation->set_rules('name', 'nom de l\'image', 'trim|required|min_length[5]|max_length[20]');
 
 			//Chargement de la librairie d'upload

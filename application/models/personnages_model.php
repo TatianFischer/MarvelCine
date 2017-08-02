@@ -33,13 +33,16 @@ class personnages_model extends CI_Model
 		$img = $this->input->post('img');
 		$img = ($img != "") ? $img : null;
 
+		$group = $this->input->post('groupe');
+		$group = ($group != "") ? $group : null;
+
 		$perso = array(
 			'identity' 	=> $this->input->post('identity'),
 			'alias' 	=> $this->input->post('alias'),
 			'actor' 	=> $this->input->post('actor'),
 			'img' 		=> $img,
 			'biography' => $this->input->post('biography'),
-			'groupe' 	=> $this->input->post('groupe')
+			'groupe' 	=> $group
 		);
 
 		$this->db->insert('personnages', $perso);
@@ -122,7 +125,7 @@ class personnages_model extends CI_Model
 		$query =  $this->db->distinct()
 					->select('groupe')
 					->from('personnages')
-//					->where_not_in('groupe', 'null')
+					// ->where_not_in('groupe', 'null')
 					->get();
 
 		return $groupes = $query->result();

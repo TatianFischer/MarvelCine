@@ -42,13 +42,11 @@ class Personnages extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		debug($_POST);
-
 		$id_film = $this->input->post('new_film');
 
 		$this->film_personnage_model->set_personnage_film($id_film, $id_personnage);
 
-		redirect('films/fiche/'.$id_film);
+		redirect('personnages/fiche/'.$id_personnage);
 
 	}
 
@@ -72,7 +70,7 @@ class Personnages extends CI_Controller
 			$this->form_validation->set_rules('actor', 'acteur', 'trim|required|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('image', 'image', 'trim');
 			$this->form_validation->set_rules('groupe', 'groupe', 'trim|min_length[5]|max_length[50]');
-			$this->form_validation->set_rules('bibliography', 'bibliographie', 'trim|min_length[15]');
+			$this->form_validation->set_rules('biography', 'biographie', 'trim|min_length[15]');
 
 		}
 
@@ -110,7 +108,7 @@ class Personnages extends CI_Controller
 		$films = $this->personnages_model->get_films_by_personnage($id);
 
 		foreach ($films as $film) {
-			$film->main_cover = $this->covers_model->get_main_cover($film->id);
+			$film->main_cover = $this->covers_model->get_random_cover($film->id);
 		}
 
 		$data['films'] = $films;

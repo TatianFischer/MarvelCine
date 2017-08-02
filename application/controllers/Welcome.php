@@ -35,15 +35,15 @@ class Welcome extends CI_Controller {
 		$this->layout->addCss('home');
 
 		$last_film = $this->films_model->get_last_film();
-		$last_film->main_cover = $this->covers_model->get_main_cover($last_film->id);
+		$last_film->main_cover = $this->covers_model->get_random_cover($last_film->id);
 		$data['last_film'] = $last_film;
 
 		$next_film = $this->films_model->get_next_film();
-		//$next_film->main_cover = $this->covers_model->get_main_cover($next_film->id);
+		$next_film->main_cover = $this->covers_model->get_random_cover($next_film->id);
 		$data['next_film'] = $next_film;
 
 		$random_film = $this->films_model->get_random_film();
-		$random_film->main_cover = $this->covers_model->get_main_cover($random_film->id);
+		$random_film->main_cover = $this->covers_model->get_random_cover($random_film->id);
 		$data['random_film'] = $random_film;
 
 	    $this->layout->view('home', $data);

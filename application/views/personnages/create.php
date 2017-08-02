@@ -26,8 +26,8 @@
 	</div>
 
 	<div class="form-group">
-		<label for="bibliography">Bibliographie</label>
-		<textarea id="bibliography" name="bibliography"><?= set_value('bibliography'); ?></textarea>
+		<label for="biography">Bibliographie</label>
+		<textarea id="biography" name="biography"><?= set_value('biography'); ?></textarea>
 	</div>
 
 	<div class="form-group">

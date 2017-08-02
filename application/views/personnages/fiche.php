@@ -8,8 +8,12 @@
 <div id="bio">
 	<h2>Biographie</h2>
 	<p>
-		<?= $personnage->biography; ?>
+		<?= nl2br($personnage->biography); ?>
 	</p>
+</div>
+
+<div>
+	<p>Interprété par : <?= $personnage->actor; ?></p>
 </div>
 
 

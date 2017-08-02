@@ -23,7 +23,6 @@ fieldset label, .like-label{
 	text-align: right;
 	width: 20%;
 	margin-right: 5%;
-	min-width: 150px;
 }
 
 
@@ -40,11 +39,11 @@ fieldset input, fieldset textarea, fieldset select{
 }
 
 
-fieldset input[type="radio"]{
+/* fieldset input[type="radio"]{
 	display: inline-block;
 	width: 10%;
 	padding-left: 10px;
-}
+} */
 
 fieldset input[name="new_director"]{
 	display: none;
@@ -55,7 +54,6 @@ fieldset input:focus{
 }
 
 fieldset input[type="submit"]{
-	margin-top: 2rem;
 	margin-left: calc(25% + 5px);
 	background-color: white;
 }
