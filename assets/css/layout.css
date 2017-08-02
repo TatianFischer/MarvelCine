@@ -283,18 +283,21 @@ ul.dropdown-menu li a{
 /* *************************** */
 /* ****** BOUTON D AJOUT ***** */
 /* *************************** */
-section p#btn-ajout{
+section div#btn-ajout{
     position: fixed;
     right: 20px;
     top: 50vh;
+}
+section #btn-ajout p{
     background-color: #A0A8AD;
     border-radius: 50%;
     height: 70px;
     width: 70px;
     margin:0;
+    padding: 2px;
 }
 
-section #btn-ajout a{
+section #btn-ajout p a{
     display: block;
     color: white;
     font-size: 4rem;
@@ -307,11 +310,11 @@ section #btn-ajout a i{
 }
 
 @media (max-width: 1199px){
-    section p#btn-ajout{
+    section div#btn-ajout{
         right: -3.5rem;
     }
 
-    section p#btn-ajout:hover{
+    section #btn-ajout:hover{
         right: 0;
     }
 }

@@ -11,8 +11,15 @@
 	<?php endforeach ?>
 </ul>
 
-<p id="btn-ajout">
-	<a href="<?= base_url("personnages/create/") ?>" title="Ajout d'un personnage">
-		<i class="fa fa-user-plus" aria-hidden="true"></i>
-	</a>
-</p>
+<div id="btn-ajout">
+    <p>
+        <a href="<?= base_url("personnages/create/") ?>" title="Ajout d'un personnage">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </a>
+    </p>
+    <p>
+        <a href="<?= base_url("films/create/") ?>" title="Ajout d'un film">
+            <i class="fa fa-film" aria-hidden="true"></i>
+        </a>
+    </p>
+</div>
