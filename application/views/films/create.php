@@ -23,7 +23,7 @@
 
 	<div class="form-group">
 		<label for="duration">Durée (min)</label>
-		<input type="number" min="0" name="duration" id="duration" value="<?= set_value('duration') ?>" required>
+		<input type="number" min="60" name="duration" id="duration" value="<?= set_value('duration') ?>">
 	</div>
 
 	<div class="form-group">

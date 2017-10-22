@@ -33,9 +33,10 @@
 	<div class="form-group">
 		<label for="groupe">Groupe</label>
 		<select name="groupe" id="groupe">
-			<?php foreach ($groupes as $name) : ?>
-				<option value="<?= $name->groupe ?>" <?= set_select('groupe', $name->groupe) ?> >
-					<?= $name->groupe ?>
+				<option value="NULL"></option>
+			<?php foreach ($groupes as $groupe) : ?>
+				<option value="<?= $groupe->id ?>" <?= set_select('groupe', $groupe->name) ?> >
+					<?= $groupe->name ?>
 				</option>
 			<?php endforeach ?>
 		</select>

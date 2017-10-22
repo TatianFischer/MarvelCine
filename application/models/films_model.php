@@ -14,9 +14,10 @@ class films_model extends CI_Model
 	}
 
 
-	public function get_all_films(){		
+	public function get_all_films($order){		
 
 		return $query = $this->db->select('id, title, phase')
+								->order_by($order, 'ASC')
 								->from('films');
 
 	}
@@ -25,8 +26,8 @@ class films_model extends CI_Model
 	 * [get_films_without_paginate description]
 	 * @return [type] [description]
 	 */
-	public function get_films_without_paginate(){
-		$query = $this->get_all_films()
+	public function get_films_without_paginate($order = 'release_date'){
+		$query = $this->get_all_films($order)
 						->get();
 
 		return $query->result();
@@ -35,7 +36,7 @@ class films_model extends CI_Model
 
 	public function get_films_by_phase($phase){
 
-		$query = $this->get_all_films()
+		$query = $this->get_all_films('release_date')
 						->where('phase', $phase)
 						->get();
 		$films = $query->result();
@@ -45,8 +46,8 @@ class films_model extends CI_Model
 	}
 
 
-	public function get_films_paginate($offset, $per_page){
-		$query = $this->get_all_films()
+	public function get_films_paginate($offset, $per_page, $order){
+		$query = $this->get_all_films($order)
 					->limit($per_page, $offset)
 					->get();
 
@@ -68,6 +69,21 @@ class films_model extends CI_Model
 
 		}
 
+	}
+
+	public function get_films_by_director($director_id)
+	{
+		if(is_numeric($director_id)){
+
+			$query = $this->db
+						->select('id, title, release_date, phase')
+						->from('films')
+						->where('director_id =', $director_id )
+						->order_by('release_date', 'ASC')
+						->get();
+			return $film = $query->result();
+
+		}
 	}
 
 
@@ -96,8 +112,11 @@ class films_model extends CI_Model
 
 
 	public function get_random_film(){
+		$last_id = $this->get_last_film()->id;
+		$next_id = $this->get_next_film()->id;
 		$query = $this->db->select('*')
 							->from('films')
+							->where(array('id !=' => $last_id, 'id !=' => $next_id))
 							->order_by('release_date', 'RANDOM')
 							->limit(1)
 							->get();

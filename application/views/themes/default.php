@@ -8,6 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= img_url('favicon.ico')?>" />
+
     <!--    Framework CSS : Alsacréation -->
     <link rel="stylesheet" href="<?= css_url('knacss') ?>">
     <!-- Font Awesome -->
@@ -58,6 +61,9 @@
                             <a href="<?= base_url()."films/index/1" ?>">Phase 1</a>
                         </li>
                     </ul> -->
+                </li>
+                <li>
+                    <a href="<?= base_url('directors/') ?>">Liste des réalisateurs</a>
                 </li>
             </ul>
             <ul class="fr">

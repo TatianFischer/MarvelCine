@@ -21,8 +21,8 @@ class directors_model extends CI_Model
 		}
 	}
 
-	public function get_allDirectors(){
-		$query = $this->db->select("*")->from('directors')->get();
+	public function get_all_directors(){
+		$query = $this->db->select("*")->from('directors')->order_by('name', 'ASC')->get();
 		return $query->result();
 	}
 	

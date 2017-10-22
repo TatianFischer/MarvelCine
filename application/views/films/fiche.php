@@ -15,13 +15,15 @@
 
 		    	foreach($covers as $cover) : ?>
 
-		        <figure class="affiche" id="<?= (isset($cover->affiche)) ? 'mainAffiche' : '' ?>">
-		            <?= img('affiches/'.$cover->img, $cover->alt); ?>
-		        </figure>
+			        <figure class="affiche" id="<?= (isset($cover->affiche)) ? 'mainAffiche' : '' ?>">
+			            <?= img('affiches/'.$cover->img, $cover->alt); ?>
+			        </figure>
 
 		    	<?php endforeach;
 
 		    endif; ?>
+		    <div id="left">&lt;</div>
+		    <div id="right">&gt;</div>
 		</div>
 
 	    <div id="covers">
@@ -54,7 +56,7 @@
 	            </div>
 	            <div>
 	            	<h2>Durée</h2>
-	            	<?php if($film->duration != 61) : ?>
+	            	<?php if($film->duration > 61) : ?>
 	            		<p><?= minutesToHours($film->duration) ?></p>
 	            	<?php else : ?>
 	            		<p>Durée inconnue</p>

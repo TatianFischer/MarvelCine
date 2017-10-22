@@ -16,6 +16,33 @@
 	<p>Interprété par : <?= $personnage->actor; ?></p>
 </div>
 
+<div>
+	<p>Appartient aux groupes :</p>
+	<ul>
+		<?php foreach ($groups as $group) : ?>
+			<li><?= $group->name ?></li>
+		<?php endforeach; ?>
+	</ul>
+
+	<p id="add_organisation">
+		<a href="<?= base_url('personnages/ajout_organisation/'.$personnage->id) ?>" id="btn-organisation">
+			<i class="fa fa-plus-circle" aria-hidden="true"></i>
+			Ajouter un groupe
+		</a>
+
+		<?= form_error('new_group');?>
+
+		<?= form_open('personnages/ajout_organisation/'.$personnage->id, 'id="form_organisation"') ?>
+		<select name="new_group">
+			<?php foreach($list_all_groups as $group) :?>
+				<option value="<?= $group->id ?>"><?= $group->name ?></option>
+			<?php endforeach; ?>
+		</select>
+		<input type="submit" name="" value="Ajouter">
+		<?= form_close() ?>
+	</p>
+</div>
+
 
 
 <h2>Liste des films</h2>

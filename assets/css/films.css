@@ -1,13 +1,10 @@
 /*Page de liste des films*/
 
 /* PAGINATION */
-.pagination:first-of-type{
+.pagination{
 	margin-bottom: 3rem;
 }
 
-.pagination:last-of-type{
-	margin-top: 3rem;
-}
 
 .pagination ul{
 	display: inline-block;
@@ -73,9 +70,9 @@
 
 .vignette div.front:hover{
 	transform: rotateY(180deg);
-	-webkit-transition-duration: 3s;
-	-o-transition-duration: 3s;
-	transition-duration: 3s;
+	-webkit-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	transition-duration: 1s;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	-ms-transform-style: preserve-3d;
@@ -87,9 +84,9 @@
 
 div.front:hover + div.back{
 	transform: rotateY(0deg);
-	-webkit-transition-duration: 3s;
-	-o-transition-duration: 3s;
-	transition-duration: 3s;
+	-webkit-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	transition-duration: 1s;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	-ms-transform-style: preserve-3d;
@@ -129,9 +126,32 @@ div.front:hover + div.back{
 /***********  Page de view ***********/
 /*************************************/
 #conteneurAffiches{
-
+	position: relative;
 }
 
+#conteneurAffiches #left, #conteneurAffiches #right{
+	position: absolute;
+	top:50%;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	text-align: center;
+	transform: translateY(-50%);
+	line-height: 40px;
+	font-size: 40px;
+	color: black;
+	background-color: rgba(255,255,255,0.5);
+	cursor: pointer;
+}
+
+#conteneurAffiches #right{
+	right: 0;
+}
+
+#conteneurAffiches #left.disable, #conteneurAffiches #right.disable{
+	color: rgba(0,0,0,0.2);
+	cursor: default;
+}
 
 .affiche{
 	display: none;
@@ -142,6 +162,7 @@ div.front:hover + div.back{
 	z-index: 1;
 	display: block;
 }
+
 
 .affiche > img{
 	position: relative;
@@ -165,12 +186,14 @@ div.front:hover + div.back{
 /* Miniatures des affiches */
 
 #covers{
+	box-sizing: border-box;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 
 #covers ul{
 	padding-left: 0;
+	margin-bottom: 0;
 	flex-wrap: nowrap;
 	display: flex;
 }
@@ -178,19 +201,13 @@ div.front:hover + div.back{
 #covers ul li.mini{
 	display: inline-block;
 	height: 100px;
-	margin-left: 10px;
 	min-width: 70px;
-	margin-top: 5px;
 	cursor: pointer;
 }
 
-#covers ul li.mini:first-child{
-	margin-left: 0;
-}
-
 #covers ul li.mini img{
-	width: 100%;
-	height: 100%;
+	width: 95%;
+	height: 95%;
 }
 
 .synopsis{

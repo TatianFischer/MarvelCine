@@ -90,6 +90,8 @@ function getAfficheOut(){
 }
 
 function getAfficheIn(){
+
+	console.log('hello');
 	
 	height = height + 1;
 
@@ -102,6 +104,57 @@ function getAfficheIn(){
 	} else {
 
 		clearInterval(getAfficheInId);
+		btnDisable();
 		
 	}
 }
+
+
+var btnLeft = document.getElementById("left");
+var btnRight = document.getElementById("right");
+var allAffiche = document.querySelectorAll("#conteneurAffiches figure");
+
+function nbCover(){
+	for(i = 0 ; i < allAffiche.length ; i++){
+		if(allAffiche[i].id == "mainAffiche"){
+			nb_cover = i;
+			break;
+		}
+	}
+
+	return nb_cover;
+}
+
+// Boutons précédent et suivant
+function btnDisable(){
+
+	nb_cover = nbCover();
+
+	if(nb_cover == 0){
+		btnLeft.className = "disable";
+		btnRight.className = "";
+	}else if(nb_cover == (allAffiche.length - 1)){
+		btnRight.className = "disable";
+		btnLeft.className = "";
+	} else {
+		btnLeft.className = "";
+		btnRight.className = "";
+	}
+}
+
+btnDisable();
+
+// Affiche précédente
+btnLeft.addEventListener('click', function(){
+	lastMainAffiche = document.getElementById("mainAffiche"); 
+	nb = nbCover() - 1;
+	heightFinale = parseInt(getComputedStyle(lastMainAffiche).height);
+	getAfficheOutId = setInterval(getAfficheOut);
+})
+
+btnRight.addEventListener('click', function(){
+	lastMainAffiche = document.getElementById("mainAffiche");
+	heightFinale = parseInt(getComputedStyle(lastMainAffiche).height);
+	nb = nbCover() + 1;
+	getAfficheOutId = setInterval(getAfficheOut);
+})

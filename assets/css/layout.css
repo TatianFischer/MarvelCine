@@ -46,7 +46,7 @@ nav{
     float: left;
     border: 0;
     background-color: #A81501;
-    z-index: 1;
+    z-index: 2;
 }
 
 nav label .sr-only{
@@ -293,7 +293,7 @@ section #btn-ajout p{
     border-radius: 50%;
     height: 70px;
     width: 70px;
-    margin:0;
+    margin:10px 0;
     padding: 2px;
 }
 

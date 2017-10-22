@@ -28,14 +28,14 @@ class Films extends CI_Controller
 
 
 
-	public function index($phase = null){
-		if($phase == null){
+	public function index($phase = null, $order = 'release_date'){
+		if($phase == null || $phase == 0){
 			// Pagination
-			$this->config_paginate();
+			$this->config_paginate($order);
 
 			$data['liens'] = $this->pagination->create_links();
 
-			$films = $this->films_model->get_films_paginate(0, $this->per_page);
+			$films = $this->films_model->get_films_paginate(0, $this->per_page, $order);
 
 		} else {
 
@@ -48,6 +48,8 @@ class Films extends CI_Controller
 		}
 
 		$data['films'] = $films;
+		$data['phase'] = $phase;
+		$data['order'] = $order;
 
 		//debug($data);
 
@@ -78,15 +80,15 @@ class Films extends CI_Controller
 		// Chargement de la librairie de validation
 		$this->load->library('form_validation');
 
-		$data['directors'] = $this->directors_model->get_allDirectors();
+		$data['directors'] = $this->directors_model->get_all_directors();
 
 		if($_POST){
 			$this->form_validation->set_rules('title', 'titre', 'trim|required|min_length[3]|max_length[255]');
 			$this->form_validation->set_rules('release_date', 'date de sortie', 'trim|required|regex_match[/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/]');
 			$this->form_validation->set_rules('synopsis', 'résumé', 'trim|min_length[5]');
-			$this->form_validation->set_rules('duration', 'durée', 'trim|required|is_natural_no_zero|greater_than[60]|less_than[300]');
+			$this->form_validation->set_rules('duration', 'durée', 'trim|is_natural_no_zero|greater_than[60]|less_than[300]');
 			$this->form_validation->set_rules('phase', 'phase', 'trim|required|greater_than[0]|less_than[10]');
-			$this->form_validation->set_rules('trailer', 'trailer', 'trim|required|exact_length[8]|integer');
+			$this->form_validation->set_rules('trailer', 'trailer', 'trim|exact_length[8]|integer');
 
 			if($this->input->post('director') != 'other'){
 				$this->form_validation->set_rules('director', 'réalisateur', 'trim|required|is_natural_no_zero');
@@ -115,13 +117,17 @@ class Films extends CI_Controller
 	}
 
 
-	private function config_paginate(){
-		$config['base_url'] = base_url().'films/page/';
-		$config['first_url'] = base_url().'films/';
-		$config['total_rows'] = $this->films_model->get_all_films()->count_all_results();
+	private function config_paginate($order = 'release_date'){
+		$config['base_url'] = base_url().'films/number/'.$order;
+		$config['first_url'] = base_url().'films/number/0/'.$order;
+		$config['total_rows'] = $this->films_model->get_all_films($order)->count_all_results();
 		$config['per_page'] = $this->per_page;
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
 		$config['cur_tag_open'] = '<li class="current"><b>';
 		$config['cur_tag_close'] = '</b></li>';
 		$config['prev_tag_open'] = '<li>';
@@ -224,19 +230,26 @@ class Films extends CI_Controller
 	}
 
 
-	public function page($offset){
+	public function number($order = 'release_date', $offset){
 		// Pagination
-		$this->config_paginate();
+		$this->config_paginate($order);
 
 		$data['liens'] = $this->pagination->create_links();
 
-		$films = $this->films_model->get_films_paginate($offset, $this->per_page);
+		$films = $this->films_model->get_films_paginate($offset, $this->per_page, $order);
+
+		foreach ($films as $film) {
+			$film->main_cover = $this->covers_model->get_random_cover($film->id);
+		}
 
 		$data['films'] = $films;
+		$data['offset'] = $offset;
+		$data['order'] = $order;
 
 		//debug($data);
 
 		// On rend la vue
+		$this->layout->setTitre('Index - Films');
 		$this->layout->addCss('films');
 	    $this->layout->view('films/index', $data);
 	}
