@@ -58,6 +58,17 @@ fieldset input[type="submit"]{
 	background-color: white;
 }
 
+div.image{
+	width: 100px;
+	margin-left: 25%;
+	margin-top: 5px;
+}
+
+div.image img{
+	width: 100px;
+	height: 100px;
+}
+
 
 @media (max-width: 768px) {
 	fieldset label{

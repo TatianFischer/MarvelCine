@@ -2,7 +2,12 @@ h1{
 	text-align: center;
 }
 
+section #actor{
+	margin-bottom: 40px;
+}
+
 section #bio{
+	clear: both;
 	position: relative;
 	border: solid .3rem #A81501;
 	padding: 10px 20px;
@@ -129,12 +134,30 @@ section #list_films a li img{
 	object-fit: cover;
 }
 
+#btn-film, #btn-organisation, #btn-update{
+	padding:10px 15px;
+	border: 2px solid black;
+	border-radius: 15px;
+	line-height: 5rem;
+	text-decoration: none;
+}
+
+#btn-update{
+	float: right;
+	line-height: initial;
+}
+
+#btn-film:hover, #btn-organisation:hover, #btn-update:hover{
+	border-color: #A81501;
+	color: #A81501;
+}
+
 /* ******************* */
 /* Form. ajout film */
 /* ******************* */
 #form_film, #form_organisation{
 	display: none;
-	position: relative;
+	/*position: relative;*/
 	z-index: 1;
 }
 
@@ -151,22 +174,6 @@ section #list_films a li img{
 	background-color: white;
 	cursor: pointer;
 }
-
-#btn-film, #btn-organisation{
-	position: relative;
-	padding:10px 15px;
-	border: 2px solid black;
-	border-radius: 15px;
-	line-height: 5rem;
-	text-decoration: none;
-}
-
-#btn-film:hover, #btn-organisation:hover{
-	border-color: #A81501;
-	color: #A81501;
-}
-
-
 
 
 /* ******************* */
@@ -232,6 +239,14 @@ section #directors a:hover:before{
 @media (max-width: 543px) {
 	section #list_persos li{
 		width: 100%;
+	}
+
+	section #actor{
+		margin: 20px 0;
+	}
+
+	#btn-update{
+		float: none;
 	}
 
 	#form_perso input, #form_perso select, #form_perso input[type="submit"]{

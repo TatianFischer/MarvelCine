@@ -4,6 +4,16 @@
 
 <h1>Fiche de <?= $personnage->identity; ?></h1>
 
+<p>
+	<a href="<?= base_url('personnages/update/'.$personnage->id) ?>" id="btn-update">
+		<i class="fa fa-pencil" aria-hidden="true"></i>
+		Modifier
+	</a>
+</p>
+
+<div id="actor">
+	<p>Interprété par : <?= $personnage->actor; ?></p>
+</div>
 
 <div id="bio">
 	<h2>Biographie</h2>
@@ -12,9 +22,7 @@
 	</p>
 </div>
 
-<div>
-	<p>Interprété par : <?= $personnage->actor; ?></p>
-</div>
+
 
 <div>
 	<p>Appartient aux groupes :</p>

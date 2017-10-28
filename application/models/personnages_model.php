@@ -126,4 +126,22 @@ class personnages_model extends CI_Model
 
 		return $groupes = $query->result();
 	}
+
+	public function update_personnage($id_personnage)
+	{
+		$img = $this->input->post('img');
+		$img = ($img != "") ? $img : null;
+
+		$perso = array(
+			'identity' 	=> $this->input->post('identity'),
+			'alias' 	=> $this->input->post('alias'),
+			'actor' 	=> $this->input->post('actor'),
+			'img' 		=> $img,
+			'biography' => $this->input->post('biography')
+		);
+
+		$this->db->where('id', $id_personnage);
+
+		$this->db->update('personnages', $perso);
+	}
 }
