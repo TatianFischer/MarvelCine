@@ -221,4 +221,9 @@ class Personnages extends CI_Controller
 			
 		}
 	}
+
+	public function update_bio($id_personnage)
+	{
+		$this->personnages_model->set_bio($id_personnage);
+	}
 }

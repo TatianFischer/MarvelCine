@@ -31,3 +31,22 @@ function toggle(var_boolean, elementId, e){
 		return var_boolean = false;
 	}
 }
+
+
+eltTextarea = document.getElementsByTagName('textarea');
+
+for(elt of eltTextarea){
+	elt.addEventListener("focus", resize(elt));
+}
+
+function resize(textarea) {
+    var txt = textarea.value;
+    var elmtWidth = textarea.offsetWidth;
+    var colsElmt = textarea.cols;
+    var line = txt.split("\n");
+    var nbrLines = 2;
+    for(var i=0;i<line.length;i++) {
+        nbrLines += Math.floor(line[i].length / (elmtWidth / (colsElmt/2)));
+    }
+    textarea.rows = nbrLines;
+}

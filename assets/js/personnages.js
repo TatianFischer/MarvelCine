@@ -23,3 +23,22 @@ btn_orga.addEventListener('click', function(e){
 		is_saw_film = toggle(is_saw_film, "form_film", e);
 	}
 })
+
+
+
+// Mise à jour de la biographie
+elmtBio = document.getElementById('bio').children['bio'];
+elmtBio.addEventListener('focusout', function() {
+	url = elmtBio.dataset.url;
+	bio = elmtBio.value;
+	console.log(bio);
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+	    	console.log('fait');
+	    }
+	};
+	xhttp.open("POST", url, true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("bio="+bio);
+});

@@ -144,4 +144,12 @@ class personnages_model extends CI_Model
 
 		$this->db->update('personnages', $perso);
 	}
+
+	public function set_bio($id_personnage){
+		$bio = $this->input->post('bio');
+
+		$this->db->where('id', $id_personnage);
+
+		$this->db->update('personnages', array('biography' => $bio));
+	}
 }

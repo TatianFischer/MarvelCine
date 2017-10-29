@@ -17,9 +17,7 @@
 
 <div id="bio">
 	<h2>Biographie</h2>
-	<p>
-		<?= nl2br($personnage->biography); ?>
-	</p>
+	<textarea name="bio" data-url="<?= base_url('personnages/update_bio/'.$personnage->id) ?>"><?= $personnage->biography ?></textarea>
 </div>
 
 
