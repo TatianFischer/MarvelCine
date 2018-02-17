@@ -89,7 +89,7 @@ class personnages_model extends CI_Model
 
 		if(is_numeric($film_id)){
 
-			$query = $this->db->select('*')
+			$query = $this->db->select('personnages.id, personnages.identity, personnages.actor, personnages.alias')
 							->from('film_personnage')
 							->join('personnages', 'film_personnage.perso_id = personnages.id')
 							->where('film_id', $film_id)	

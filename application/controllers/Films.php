@@ -31,11 +31,13 @@ class Films extends CI_Controller
 	public function index($phase = null, $order = 'release_date'){
 		if($phase == null || $phase == 0){
 			// Pagination
-			$this->config_paginate($order);
+			/*$this->config_paginate($order);
+			$films = $this->films_model->get_films_paginate(0, $this->per_page, $order);*/
+
+			// Lazy-load
+			$films = $this->films_model->get_films_without_paginate($order);
 
 			$data['liens'] = $this->pagination->create_links();
-
-			$films = $this->films_model->get_films_paginate(0, $this->per_page, $order);
 
 		} else {
 
@@ -64,7 +66,6 @@ class Films extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		debug($_POST);
 		$id_perso = $this->input->post('new_perso');
 
 		$this->film_personnage_model->set_personnage_film($id_film, $id_perso);
@@ -158,21 +159,21 @@ class Films extends CI_Controller
 
 		// Liste de tous les personnages (formulaire d'ajout)
 		$liste = $this->personnages_model->get_all_personnages();
+		$nb_perso = count($liste);
 		// on enlève les personnages déjà ajouter au film
-		for ($i = 0 ; $i < count($liste) ; $i++) {
+		for ($i = 0 ; $i < count($liste); $i++) {
 			foreach ($data['personnages'] as $perso_in_film) {
+
 				if($liste[$i]->id == $perso_in_film->id){
-					//debug($liste[$i]);
+					// debug($perso_in_film);
 					unset($liste[$i]);
 					$liste = array_values($liste);
+					$i--; //on se décale d'un car le tableau $liste à perdu une case
 					break;
 				}
 			}
 		}
-		//debug($liste);
 		$data['list_all_persos'] = $liste;
-		
-		//debug($data);
 
 		// ****** Formulaire : ajout affiche *****
 		// 
@@ -232,11 +233,13 @@ class Films extends CI_Controller
 
 	public function number($order = 'release_date', $offset){
 		// Pagination
-		$this->config_paginate($order);
+		//$this->config_paginate($order);
+		//$films = $this->films_model->get_films_paginate($offset, $this->per_page, $order);
 
 		$data['liens'] = $this->pagination->create_links();
 
-		$films = $this->films_model->get_films_paginate($offset, $this->per_page, $order);
+		// Lazy-load
+		$films = $this->films_model->get_films_without_paginate($order);
 
 		foreach ($films as $film) {
 			$film->main_cover = $this->covers_model->get_random_cover($film->id);
