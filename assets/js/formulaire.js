@@ -89,6 +89,28 @@ if(parseInt(window.innerWidth) <= 768){
 
 
 
+// Changement d'état des boutons radio
+allBtnRadio = document.querySelectorAll('#sexe input');
+for(var btnRadio of allBtnRadio){
+	if(btnRadio.checked){
+		btnRadio.previousElementSibling.style.backgroundColor = "#007F09";
+	}
+
+	btnRadio.addEventListener("click", function(){
+
+		for(var btnRadio of allBtnRadio){
+			btnRadio.previousElementSibling.style.backgroundColor = "#A71503";
+		}
+
+		this.previousElementSibling.style.backgroundColor = "#007F09";
+	})	
+}
+
+
+// Vérification du formulaire
+
+//this.checked pour l'état des bouton radio
+
 
 
 

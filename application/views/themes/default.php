@@ -1,3 +1,5 @@
+<?php $user_id = $this->session->userdata('user_id'); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,15 +69,24 @@
                 </li>
             </ul>
             <ul class="fr">
-                <li>
-                    <a href="">Connexion</a>
-                </li>
-                <li>
-                    <a href="">Bonjour ...</a>
-                </li>
-                <li>
-                    <a href="">Déconnexion</a>
-                </li>
+                <?php if(!$user_id) : ?>
+                    <li>
+                        <a href="<?=base_url('users/register')?>">Inscription</a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url('users/login')?>">Connexion</a>
+                    </li>
+                <?php else : ?>
+                    <?php $user_pseudo = $this->session->userdata('user_pseudo');
+                            $user = (!is_null($user_pseudo)) ? $user_pseudo : $this->session->userdata('user_firstname');
+                     ?>
+                    <li>
+                        <a href="<?=base_url('users/profil/'.$user_id)?>">Bonjour <?= $user ?></a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url('users/logout')?>">Déconnexion</a>
+                    </li>
+                <?php endif ?>
             </ul>
         </nav>
         
@@ -84,7 +95,7 @@
         </main>
 
         <footer>
-            <p>2017 - <a href="http://www.tatianafischer.fr" target="_blanc">@TatianFischer</a> - Tous droits réservés</p>
+            <p>2017/<?= date('Y') ?> - <a href="http://www.tatianafischer.fr" target="_blanc">@TatianFischer</a> - Tous droits réservés</p>
             <p>The Flaticons are designed by Freepik from Flaticon</p>
         </footer>
     </div>
