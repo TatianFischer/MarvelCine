@@ -30,7 +30,7 @@
                     <?php if(isset($next_film->main_cover)) : ?>
                         <?= img('affiches/'.$next_film->main_cover->img, $next_film->main_cover->alt, 'w100') ?>
                     <?php else : ?>
-                        <?= img('affiches/gray.jpg', 'w100'); ?>
+                        <?= img('affiches/10ans.jpg', 'w100'); ?>
                     <?php endif; ?>
                 </a>
             </figure>
