@@ -6,29 +6,66 @@
     </p>
 </article>
 
-<article class="grid has-gutter-xl">
+<article class="grid-3-small-2 has-gutter-l" id="home_film">
     <div>
+        <p>Dernier film</p>
         <figure>
-            <legend class="center">Dernier film sorti</legend>
-            <a href="">
-                <?= img('affiches\gray', 'test', 'w100') ?>
+            <legend class="center"><?= $last_film->title ?></legend>
+            <a href="<?= base_url("films/fiche/".$last_film->id);?>">
+                <?php if(isset($last_film->main_cover)) : ?>
+                    <?= img('affiches/'.$last_film->main_cover->img, $last_film->main_cover->alt, 'w100') ?>
+                <?php else : ?>
+                    <?= img('affiches/gray.jpg', 'w100'); ?>
+                <?php endif ?>
             </a>
         </figure>           
     </div>
+
     <div>
-        <figure>
-            <legend class="center">Prochain film à sortir</legend>
-            <a href="">
-                <?= img('affiches\gray', 'test', 'w100') ?>
-            </a>
-        </figure>
+        <p>Prochain film</p>
+        <?php if(isset($next_film)) : ?>
+            <figure>
+                <legend class="center"><?= $next_film->title ?></legend>
+                <a href="<?= base_url("films/fiche/".$next_film->id); ?>">
+                    <?php if(isset($next_film->main_cover)) : ?>
+                        <?= img('affiches/'.$next_film->main_cover->img, $next_film->main_cover->alt, 'w100') ?>
+                    <?php else : ?>
+                        <?= img('affiches/gray.jpg', 'w100'); ?>
+                    <?php endif; ?>
+                </a>
+            </figure>
+        <?php else : ?>
+            <figure>
+                <legend>Pas de prochain film</legend>
+                <a href="">Pas de prochain film</a>
+            </figure>
+        <?php endif ?>
     </div>
+
     <div>
+        <p>Film au hasard</p>
         <figure>
-            <legend class="center">Un film au hazard</legend>
-            <a href="">
-                <?= img('affiches\gray', 'test', 'w100') ?>
+            <legend class="center"><?= $random_film->title ?></legend>
+            <a href="<?= base_url("films/fiche/".$random_film->id); ?>">
+                <?php if(isset($random_film->main_cover)) : ?>
+                    <?= img('affiches/'.$random_film->main_cover->img, $random_film->main_cover->alt, 'w100') ?>
+                <?php else : ?>
+                    <?= img('affiches/gray.jpg', 'w100'); ?>
+                <?php endif; ?>
             </a>
         </figure>
     </div>
 </article>
+
+<div id="btn-ajout">
+    <p>
+        <a href="<?= base_url("personnages/create/") ?>" title="Ajout d'un personnage">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </a>
+    </p>
+    <p>
+        <a href="<?= base_url("films/create/") ?>" title="Ajout d'un film">
+            <i class="fa fa-film" aria-hidden="true"></i>
+        </a>
+    </p>
+</div>

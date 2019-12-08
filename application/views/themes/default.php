@@ -1,3 +1,5 @@
+<?php $user_id = $this->session->userdata('user_id'); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +9,9 @@
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= img_url('favicon.ico')?>" />
 
     <!--    Framework CSS : Alsacréation -->
     <link rel="stylesheet" href="<?= css_url('knacss') ?>">
@@ -35,11 +40,9 @@
                 <?= img('logo.jpg', 'Accueil') ?>
             </a>
             <ul class="fl">
-                <li>
-                    <a href="<?= base_url()."films/" ?>">Liste des films</a>
-                </li>
                 <li class="dropdown">
-                    <a href="">Phases</a>
+                    <a href="<?= base_url()."films/" ?>">Liste des films</a>
+
                     <ul class="dropdown-menu">
                         <li>
                             <a href="<?= base_url()."films/index/1" ?>">Phase 1</a>
@@ -50,25 +53,54 @@
                         <li>
                             <a href="<?= base_url()."films/index/3" ?>">Phase 3</a>
                         </li>
+                        <li>
+                            <a href="<?= base_url()."films/index/4" ?>">Phase 4</a>
+                        </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="<?= base_url('personnages/') ?>">Liste des personnages</a>
+
+                    <!-- <ul class="dropdown-menu">
+                        <li>
+                            <a href="<?= base_url()."films/index/1" ?>">Phase 1</a>
+                        </li>
+                    </ul> -->
+                </li>
+                <li>
+                    <a href="<?= base_url('directors/') ?>">Liste des réalisateurs</a>
                 </li>
             </ul>
             <ul class="fr">
-                <li>
-                    <a href="">Connexion</a>
-                </li>
-                <li>
-                    <a href="">Bonjour ...</a>
-                </li>
-                <li>
-                    <a href="">Déconnexion</a>
-                </li>
+                <?php if(!$user_id) : ?>
+                    <li>
+                        <a href="<?=base_url('users/register')?>">Inscription</a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url('users/login')?>">Connexion</a>
+                    </li>
+                <?php else : ?>
+                    <?php $user_pseudo = $this->session->userdata('user_pseudo');
+                            $user = (!is_null($user_pseudo)) ? $user_pseudo : $this->session->userdata('user_firstname');
+                     ?>
+                    <li>
+                        <a href="<?=base_url('users/profil/'.$user_id)?>">Bonjour <?= $user ?></a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url('users/logout')?>">Déconnexion</a>
+                    </li>
+                <?php endif ?>
             </ul>
         </nav>
         
         <main class="mw1140p center">
             <section><?= $output; ?></section>            
         </main>
+
+        <footer>
+            <p>2017/<?= date('Y') ?> - <a href="http://www.tatianafischer.fr" target="_blanc">@TatianFischer</a> - Tous droits réservés</p>
+            <p>The Flaticons are designed by Freepik from Flaticon</p>
+        </footer>
     </div>
 
 

@@ -18,6 +18,15 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	public function __construct(){
+		// gére les autoload
+		parent::__construct();
+
+		$this->load->model('films_model');
+		$this->load->model('covers_model');
+	}
+
 	public function index()
 	{
 		$this->load->library('layout');
@@ -25,6 +34,20 @@ class Welcome extends CI_Controller {
 		$this->layout->addCss('layout');
 		$this->layout->addCss('home');
 
-	    $this->layout->view('home');
+		$last_film = $this->films_model->get_last_film();
+		$last_film->main_cover = $this->covers_model->get_random_cover($last_film->id);
+		$data['last_film'] = $last_film;
+
+		$next_film = $this->films_model->get_next_film();
+		if(!is_null($next_film)){
+			$next_film->main_cover = $this->covers_model->get_random_cover($next_film->id);
+		}
+		$data['next_film'] = $next_film;
+
+		$random_film = $this->films_model->get_random_film();
+		$random_film->main_cover = $this->covers_model->get_random_cover($random_film->id);
+		$data['random_film'] = $random_film;
+
+	    $this->layout->view('home', $data);
 	}
 }

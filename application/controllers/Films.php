@@ -20,6 +20,7 @@ class Films extends CI_Controller
 		$this->load->model('covers_model');
 		$this->load->model('directors_model');
 		$this->load->model('personnages_model');
+		$this->load->model('film_personnage_model');
 
 		// CSS du template
 		$this->layout->addCss('layout');
@@ -27,15 +28,16 @@ class Films extends CI_Controller
 
 
 
-	public function index($phase = null)
-	{
-		if($phase == null){
+	public function index($phase = null, $order = 'release_date'){
+		if($phase == null || $phase == 0){
 			// Pagination
-			$this->config_paginate();
+			/*$this->config_paginate($order);
+			$films = $this->films_model->get_films_paginate(0, $this->per_page, $order);*/
+
+			// Lazy-load
+			$films = $this->films_model->get_films_without_paginate($order);
 
 			$data['liens'] = $this->pagination->create_links();
-
-			$films = $this->films_model->get_films_paginate(0, $this->per_page);
 
 		} else {
 
@@ -44,10 +46,12 @@ class Films extends CI_Controller
 		}
 
 		foreach ($films as $film) {
-			$film->main_cover = $this->covers_model->get_main_cover($film->id);
+			$film->main_cover = $this->covers_model->get_random_cover($film->id);
 		}
 
 		$data['films'] = $films;
+		$data['phase'] = $phase;
+		$data['order'] = $order;
 
 		//debug($data);
 
@@ -57,30 +61,74 @@ class Films extends CI_Controller
 	}
 
 
-	public function page($offset){
-		// Pagination
-		$this->config_paginate();
+	public function ajout_personnage($id_film)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 
-		$data['liens'] = $this->pagination->create_links();
+		$id_perso = $this->input->post('new_perso');
 
-		$films = $this->films_model->get_films_paginate($offset, $this->per_page);
+		$this->film_personnage_model->set_personnage_film($id_film, $id_perso);
 
-		$data['films'] = $films;
-
-		//debug($data);
-
-		// On rend la vue
-		$this->layout->addCss('films');
-	    $this->layout->view('films/index', $data);
+		//$this->layout->addCss('formulaire');
+		redirect('films/fiche/'.$id_film);
 	}
 
-	private function config_paginate(){
-		$config['base_url'] = base_url().'films/page/';
-		$config['first_url'] = base_url().'films/';
-		$config['total_rows'] = $this->films_model->get_films()->count_all_results();
+
+	public function create(){
+		// Chargement du helper de formulaire
+		$this->load->helper('form');
+		// Chargement de la librairie de validation
+		$this->load->library('form_validation');
+
+		$data['directors'] = $this->directors_model->get_all_directors();
+
+		if($_POST){
+			$this->form_validation->set_rules('title', 'titre', 'trim|required|min_length[3]|max_length[255]');
+			$this->form_validation->set_rules('release_date', 'date de sortie', 'trim|required|regex_match[/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/]');
+			$this->form_validation->set_rules('synopsis', 'résumé', 'trim|min_length[5]');
+			$this->form_validation->set_rules('duration', 'durée', 'trim|is_natural_no_zero|greater_than[60]|less_than[300]');
+			$this->form_validation->set_rules('phase', 'phase', 'trim|required|greater_than[0]|less_than[10]');
+			$this->form_validation->set_rules('trailer', 'trailer', 'trim|exact_length[8]|integer');
+
+			if($this->input->post('director') != 'other'){
+				$this->form_validation->set_rules('director', 'réalisateur', 'trim|required|is_natural_no_zero');
+			} else {
+				$this->form_validation->set_rules('new_director', 'réalisateur', 'trim|required|min_length[5]|max_length[255]');
+			}
+			
+		}
+
+
+		if($this->form_validation->run() == FALSE){
+
+			// Si le formulaire est invalide ou vide
+			$this->layout->addCss('formulaire');
+			$this->layout->addJS('formulaire');
+
+			$this->layout->view('films/create', $data);
+
+		} else {
+			// Appel du model et ajout à la BDD
+			$id = $this->films_model->set_film();
+
+			// OK redirection vers la fiche du film
+			redirect('films/fiche/'.$id);
+		}
+	}
+
+
+	private function config_paginate($order = 'release_date'){
+		$config['base_url'] = base_url().'films/number/'.$order;
+		$config['first_url'] = base_url().'films/number/0/'.$order;
+		$config['total_rows'] = $this->films_model->get_all_films($order)->count_all_results();
 		$config['per_page'] = $this->per_page;
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
 		$config['cur_tag_open'] = '<li class="current"><b>';
 		$config['cur_tag_close'] = '</b></li>';
 		$config['prev_tag_open'] = '<li>';
@@ -94,28 +142,121 @@ class Films extends CI_Controller
 	}
 
 
-	public function view($id){
+	public function fiche($id_film){
 
 		// Appel à la base de données pour récupérer le film
-		$data['film'] = $this->films_model->get_film_by_id($id);
+		$data['film'] = $this->films_model->get_film_by_id($id_film);
 
 		// Appel à la base de données pour récupérer les personnages
-		$data['personnages'] = $this->personnages_model->get_personnages($id);
+		$data['personnages'] = $this->personnages_model->get_personnages_in_film($id_film);
 
 		// Appel à la base de données pour le réalisateur
 		$data['director'] = $this->directors_model->get_director($data['film']->director_id);
 
 		// Les affiches du film
-		$data['covers'] = $this->covers_model->get_covers($id);
-		
-		//debug($data);
+		$data['covers'] = $this->covers_model->get_covers($id_film);
+		if($data['covers'] != null){$data['covers'][0]->affiche = 1;}
+
+		// Liste de tous les personnages (formulaire d'ajout)
+		$liste = $this->personnages_model->get_all_personnages();
+		$nb_perso = count($liste);
+		// on enlève les personnages déjà ajouter au film
+		for ($i = 0 ; $i < count($liste); $i++) {
+			foreach ($data['personnages'] as $perso_in_film) {
+
+				if($liste[$i]->id == $perso_in_film->id){
+					// debug($perso_in_film);
+					unset($liste[$i]);
+					$liste = array_values($liste);
+					$i--; //on se décale d'un car le tableau $liste à perdu une case
+					break;
+				}
+			}
+		}
+		$data['list_all_persos'] = $liste;
+
+		// ****** Formulaire : ajout affiche *****
+		// 
+		// Chargement du helper de formulaire
+		$this->load->helper('form');
+		// Chargement de la librairie de validation
+		$this->load->library('form_validation');
+
+		if($_POST){
+			$this->form_validation->set_rules('alt', 'description', 'trim|required|min_length[5]');
+			$this->form_validation->set_rules('name', 'nom de l\'image', 'trim|required|min_length[5]|max_length[20]');
+
+			//Chargement de la librairie d'upload
+			$config['upload_path'] = './assets/images/affiches/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']  = '200';
+			$config['max_width']  = '768';
+			$config['max_height']  = '1080';
+			$config['file_name'] = $this->input->post('name');
+			
+			$this->load->library('upload', $config);
+		}
+
+
+		if($this->form_validation->run() == FALSE){
+			// Si le formulaire est invalide ou vide
+			$this->layout->addCss('formulaire');
+			$this->layout->addJS('formulaire');
+
+
+		} else {
+
+			if ( !$this->upload->do_upload('img')){
+				// Si l'upload ne fonctionne pas
+				$this->layout->addCss('formulaire');
+				$this->layout->addJS('formulaire');
+				$data['error'] = $this->upload->display_errors();
+			}
+			else{				
+				// Appel du model et ajout à la BDD
+				//debug($_POST);
+				$this->covers_model->set_cover($id_film);
+
+				// OK redirection vers la fiche du film
+				redirect('films/fiche/'.$id_film);
+			}
+		}
 
 		// On rend la vue
 		$this->layout->setTitre('Film - '.$data['film']->title);
 		$this->layout->addCss('films');
 		$this->layout->addJS('films');
-		$this->layout->view('films/view', $data);
+		$this->layout->view('films/fiche', $data);
 
 	}
+
+
+	public function number($order = 'release_date', $offset){
+		// Pagination
+		//$this->config_paginate($order);
+		//$films = $this->films_model->get_films_paginate($offset, $this->per_page, $order);
+
+		$data['liens'] = $this->pagination->create_links();
+
+		// Lazy-load
+		$films = $this->films_model->get_films_without_paginate($order);
+
+		foreach ($films as $film) {
+			$film->main_cover = $this->covers_model->get_random_cover($film->id);
+		}
+
+		$data['films'] = $films;
+		$data['offset'] = $offset;
+		$data['order'] = $order;
+
+		//debug($data);
+
+		// On rend la vue
+		$this->layout->setTitre('Index - Films');
+		$this->layout->addCss('films');
+	    $this->layout->view('films/index', $data);
+	}
+
+	
 	
 }

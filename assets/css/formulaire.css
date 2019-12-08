@@ -1,0 +1,127 @@
+form{
+
+}
+
+fieldset{
+	border : 3px solid #141b69;
+	padding : 5rem 5%;
+}
+
+fieldset legend{
+	padding: 1rem;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+fieldset div.form-group{
+	margin-bottom: 2rem;
+	position: relative;
+}
+
+fieldset label, .like-label{
+	display: inline-block;
+	text-align: right;
+	width: 20%;
+	margin-right: 5%;
+}
+
+fieldset #sexe label{
+	width: calc(72% / 4);
+	margin: 0;
+	text-align: left;
+}
+
+fieldset #sexe i{
+	width: 80%;
+	height: 43.75px;
+	line-height: 43.75px;
+	border-radius: 10px;
+	text-align: center;
+	font-weight: bolder;
+	background-color: #A71503;
+	color:white;
+}
+
+fieldset #sexe input{
+	display: none;
+}
+
+
+fieldset input, fieldset textarea, fieldset select{
+	display: inline-block;
+	width: 70%;
+	border: 3px solid black;
+	padding:10px;
+}
+
+.like-input{
+	display: inline-block;
+	width: 60%;	
+}
+
+
+fieldset input[type="radio"]{
+	display: inline-block;
+	width: 10%;
+	padding-left: 10px;
+}
+
+fieldset input[name="new_director"]{
+	display: none;
+}
+
+fieldset input:focus{
+	border-color: #141B69;
+}
+
+fieldset input[type="submit"]{
+	margin-left: calc(25% + 5px);
+	background-color: white;
+}
+
+div.image{
+	width: 100px;
+	margin-left: 25%;
+	margin-top: 5px;
+}
+
+div.image img{
+	width: 100px;
+	height: 100px;
+}
+
+
+@media (max-width: 768px) {
+	fieldset .form-group:not(#sexe) label{
+		width: auto;
+		min-width: 0;
+		padding: 0 5px;
+		background-color: white;
+		position: absolute;
+		top:5px;
+		left: 10px;
+	}
+
+	fieldset .form-group .like-label{
+		width: auto;
+		min-width: 0;
+		text-align: left;
+		padding-left: 10px;
+	}
+
+	fieldset .form-group#sexe label{
+
+	}
+
+	fieldset label.active{
+		top: -15px;
+	}
+
+	fieldset input, fieldset textarea, fieldset select{
+		width: 100%;
+	}
+
+	fieldset input[type="submit"]{
+		margin-left: 0;
+	}
+}

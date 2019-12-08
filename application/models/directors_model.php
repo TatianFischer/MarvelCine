@@ -20,5 +20,10 @@ class directors_model extends CI_Model
 			return $director = $query->row();
 		}
 	}
+
+	public function get_all_directors(){
+		$query = $this->db->select("*")->from('directors')->order_by('name', 'ASC')->get();
+		return $query->result();
+	}
 	
 }

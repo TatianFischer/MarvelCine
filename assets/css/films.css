@@ -1,37 +1,36 @@
 /*Page de liste des films*/
 
 /* PAGINATION */
-.pagination:first-of-type{
+.pagination{
 	margin-bottom: 3rem;
 }
 
-.pagination:last-of-type{
-	margin-top: 3rem;
-}
 
 .pagination ul{
 	display: inline-block;
 	margin-bottom: 1rem;
 	padding-left: 0;
 	border-radius: .5rem;
-	border: #141b69 solid .2rem;
+	border: #A81501 ridge .4rem;
 }
 
 .pagination ul li{
 	display: inline-block;
 	padding: .5rem 1rem;
+	border-left: #A81501 solid .3rem;
 }
 
-.pagination ul li:nth-child(n){
-	border-right: #141b69 solid .2rem;
-}
-
-.pagination ul li:last-child{
-	border-right: none;
+.pagination ul li:first-child{
+	border-left: none;
 }
 
 .pagination ul li.current{
-	background-color: #141b69;
+	background-color: #A81501;
+	border-left: none;
+}
+
+.pagination ul li.current + li{
+	border-left: none;
 }
 
 .pagination ul li a{
@@ -71,9 +70,9 @@
 
 .vignette div.front:hover{
 	transform: rotateY(180deg);
-	-webkit-transition-duration: 3s;
-	-o-transition-duration: 3s;
-	transition-duration: 3s;
+	-webkit-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	transition-duration: 1s;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	-ms-transform-style: preserve-3d;
@@ -85,9 +84,9 @@
 
 div.front:hover + div.back{
 	transform: rotateY(0deg);
-	-webkit-transition-duration: 3s;
-	-o-transition-duration: 3s;
-	transition-duration: 3s;
+	-webkit-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	transition-duration: 1s;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	-ms-transform-style: preserve-3d;
@@ -109,6 +108,9 @@ div.front:hover + div.back{
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	color: #fff;
 	text-align: center;
@@ -124,9 +126,32 @@ div.front:hover + div.back{
 /***********  Page de view ***********/
 /*************************************/
 #conteneurAffiches{
-
+	position: relative;
 }
 
+#conteneurAffiches #left, #conteneurAffiches #right{
+	position: absolute;
+	top:50%;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	text-align: center;
+	transform: translateY(-50%);
+	line-height: 40px;
+	font-size: 40px;
+	color: black;
+	background-color: rgba(255,255,255,0.5);
+	cursor: pointer;
+}
+
+#conteneurAffiches #right{
+	right: 0;
+}
+
+#conteneurAffiches #left.disable, #conteneurAffiches #right.disable{
+	color: rgba(0,0,0,0.2);
+	cursor: default;
+}
 
 .affiche{
 	display: none;
@@ -137,6 +162,7 @@ div.front:hover + div.back{
 	z-index: 1;
 	display: block;
 }
+
 
 .affiche > img{
 	position: relative;
@@ -157,15 +183,17 @@ div.front:hover + div.back{
 
 
 
-/* Miniatures des afiches */
+/* Miniatures des affiches */
 
 #covers{
+	box-sizing: border-box;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 
 #covers ul{
 	padding-left: 0;
+	margin-bottom: 0;
 	flex-wrap: nowrap;
 	display: flex;
 }
@@ -173,19 +201,44 @@ div.front:hover + div.back{
 #covers ul li.mini{
 	display: inline-block;
 	height: 100px;
-	margin-left: 10px;
 	min-width: 70px;
-	margin-top: 5px;
 	cursor: pointer;
 }
 
-#covers ul li.mini:first-child{
-	margin-left: 0;
+#covers ul li.mini img{
+	width: 95%;
+	height: 95%;
 }
 
-#covers ul li.mini img{
-	width: 100%;
-	height: 100%;
+.synopsis{
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+#informations p > a{
+	text-decoration: none;
+}
+
+#informations p > a:hover{
+	text-decoration: underline;
+}
+
+#form_perso{
+	display: none;
+}
+
+#form_perso input, #form_perso select{
+	display: inline-block;
+	width: 60%;
+	border: 3px solid black;
+	padding:10px;
+}
+
+#form_perso input[type="submit"]{
+	width: 35%;
+	margin-top: 2rem;
+	background-color: white;
+	cursor: pointer;
 }
 
 
@@ -197,6 +250,22 @@ div.front:hover + div.back{
 	/* Informations */
 	#informations > div:first-child > div:nth-child(3){
 		width: 100%;
+	}
+
+	#informations > div:first-child > div{
+		min-width: 160px;
+	}
+}
+
+@media (max-width: 543px){
+	#form_perso input, #form_perso select, #form_perso input[type="submit"]{
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.synopsis{
+		max-height: initial;
 	}
 }
 
@@ -218,7 +287,7 @@ div.front:hover + div.back{
 	min-width: 20rem;
 }
 
-#menuBA >  div > a, #menuBA > div > button{
+#menuBA >  div > a, #menuBA > div > button, #btn-hero{
 	padding:10px 15px;
 	border: 2px solid black;
 	border-radius: 15px;
@@ -231,7 +300,7 @@ div.front:hover + div.back{
 	line-height: inherit;
 }
 
-#menuBA >  div:hover > a, #menuBA > div:hover > button{
+#menuBA >  div:hover > a, #menuBA > div:hover > button, #btn-hero:hover{
 	border-color: #A81501;
 	color: #A81501;
 }
@@ -252,4 +321,8 @@ div.front:hover + div.back{
 	height: 75%;
 	top: 0;
 	left: 0;
+}
+
+#form_cover{
+	display: none;
 }

@@ -11,6 +11,6 @@ function date_fr($date, $format)
 function minutesToHours($duration){
 	$duree = intval($duration / 60).'h';
 	$duree .= (($duration % 60) < 10) ? '0' : '';
-	$duree .= ($duration % 60);
+	$duree .= ($duration % 60).'min';
 	return $duree;
 }
